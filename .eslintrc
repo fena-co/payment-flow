@@ -53,12 +53,7 @@
         "jsx": "never"
       }
     ],
-    "react/function-component-definition": [
-      2,
-      {
-        "namedComponents": "function-declaration"
-      }
-    ]
+    "react/function-component-definition": "off"
   },
   "overrides": [
     {
