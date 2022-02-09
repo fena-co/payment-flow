@@ -1,16 +1,14 @@
+import Section from '@/components/Section';
+import styled from 'styled-components';
 import React from 'react';
+import TopUpPanel from '@/components/TopUpPanel';
 
-import Title from '@/components/Title';
+const MainSection = styled(Section)``;
 
-export default function Home() {
-  return (
-    <main>
-      <Title>Hello TypeScript!</Title>
-      <p>A TypeScript starter for Gatsby. Great for advanced users.</p>
-      <p>
-        Follow me on Twitter (
-        <a href="https://twitter.com/jpedroschmitz">@jpedroschmitz</a>)
-      </p>
-    </main>
-  );
-}
+const Home: React.FunctionComponent = () => (
+  <MainSection>
+    <TopUpPanel />
+  </MainSection>
+);
+
+export default Home;
