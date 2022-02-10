@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
@@ -61,7 +60,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<any> {
   withImage?: boolean;
   to?: string;
 }
-const ButtonDefault: React.FunctionComponent<ButtonProps> = ({
+const Button: React.FunctionComponent<ButtonProps> = ({
   children,
   white,
   small,
@@ -113,4 +112,4 @@ const ButtonDefault: React.FunctionComponent<ButtonProps> = ({
   );
 };
 
-export default ButtonDefault;
+export default Button;

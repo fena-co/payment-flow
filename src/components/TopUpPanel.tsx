@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Body4, SmallP, Strong, Subtitle4 } from '@/components/Typography';
-import styled from 'styled-components';
-import SecondaryButton from '@/components/SecondaryButton';
-import ButtonDefault from '@/components/ButtonDefault';
 import { useForm } from 'react-hook-form';
+import styled from 'styled-components';
+
+import SecondaryButton from '@/components/SecondaryButton';
+import Buttton from '@/components/Button';
 import OvalButton from './OvalButton';
 import ButtonRound from './ButtonRound';
 
@@ -82,7 +83,7 @@ const InputLine = styled.div`
   align-items: center;
 `;
 
-const Pound = styled(Subtitle4)`
+const Currency = styled(Subtitle4)`
   margin-left: 1rem;
 `;
 
@@ -127,15 +128,20 @@ const RightButton = styled.div`
     height: 30%;
   }
 `;
+
+interface AmountFormValues {
+  amount: number;
+}
+
 const TopUpPanel: React.FunctionComponent = () => {
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AmountFormValues>();
+
   const onSubmit = (data) => console.log(data);
 
-  const [inputVal, setInputVal] = useState(``);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputVal(e.target.value);
-  };
-  console.log(inputVal);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Wrapper>
@@ -149,14 +155,11 @@ const TopUpPanel: React.FunctionComponent = () => {
               <InputLabel>Select amount to top up</InputLabel>
               <InputLine>
                 <Input
-                  onChange={handleChange}
-                  value={inputVal}
                   type="number"
                   placeholder="0"
-                  id="topUpSummary"
-                  {...register(`topUpSummary`)}
+                  {...register(`amount`, { required: true, min: 1 })}
                 />
-                <Pound>£</Pound>
+                <Currency>£</Currency>
               </InputLine>
             </InputSection>
           </Left>
@@ -177,7 +180,9 @@ const TopUpPanel: React.FunctionComponent = () => {
         <CancelButton>
           <SecondaryButton>Cancel</SecondaryButton>
         </CancelButton>
-        <ButtonDefault disabled={inputVal.length < 1}>Continue</ButtonDefault>
+        <Buttton type="submit" disabled={Boolean(errors.amount)}>
+          Continue
+        </Buttton>
       </Buttons>
     </form>
   );
