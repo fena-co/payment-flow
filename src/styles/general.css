@@ -1,0 +1,14 @@
+body {
+  /* spacings */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 2rem;
+
+  /* colors */
+  --dark-text: #13273f;
+  --light-text: #8181a5;
+}
+
+.accent-text-gray {
+  color: var(--light-text) !important;
+}
