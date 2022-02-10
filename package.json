@@ -1,13 +1,11 @@
 {
-  "name": "gatsby-starter-ts",
+  "name": "payment-flow",
   "description": "A TypeScript starter for Gatsby that includes all you need to build amazing projects",
   "version": "1.0.0",
   "private": true,
-  "author": "João Pedro Schmitz <hey@joaopedro.dev> (https://joaopedro.dev)",
   "license": "MIT",
   "keywords": [
     "gatsby",
-    "starter",
     "typescript"
   ],
   "scripts": {

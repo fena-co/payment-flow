@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import React from 'react';
 import TopUpPanel from '@/components/TopUpPanel';
 
-const MainSection = styled(Section)``;
+const MainSection = styled(Section)`
+  height: 100vh;
+`;
 
 const Home: React.FunctionComponent = () => (
   <MainSection>

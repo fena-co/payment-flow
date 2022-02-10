@@ -5,7 +5,7 @@ const Section = styled.section`
   flex-wrap: wrap;
   background-color: #f4f7f9;
   @media (max-width: 1200px) {
-    padding: 5rem 2rem;
+    padding: 3rem 1rem;
   }
 `;
 export default Section;
