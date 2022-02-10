@@ -7,7 +7,9 @@ export const StyledButton = styled.button`
   background-size: cover;
   border-radius: 5px;
   padding: ${(props) =>
-    props[`aria-atomic`] ? `0.5rem 1rem` : `0.75rem 2rem`};
+    props[`aria-atomic`]
+      ? `var(--space-1) var(--space-2)`
+      : `0.75rem var(--space-3)`};
   color: white;
   font-weight: bolder;
   transition: 200ms;
@@ -34,7 +36,9 @@ export const StyledLink = styled(Link)`
   border-radius: 5px;
   font-size: 14px;
   padding: ${(props) =>
-    props[`aria-atomic`] ? `0.5rem 1rem` : `0.75rem 2rem`};
+    props[`aria-atomic`]
+      ? `var(--space-1) var(--space-2)`
+      : `0.75rem var(--space-3)`};
   color: white;
   font-weight: bolder;
   transition: 200ms;

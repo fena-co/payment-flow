@@ -11,9 +11,9 @@ import ButtonRound from './ButtonRound';
 const Wrapper = styled.div`
   background-color: #ffff;
   border-radius: 10px;
-  padding: 2rem;
+  padding: var(--space-3);
   box-shadow: 0px 2px 15px rgba(108, 108, 138, 0.15);
-  @media (max-width: 1200px) {
+  @media (max-width: 900px) {
     background-color: #f4f7f9;
     box-shadow: none;
     padding: 0;
@@ -21,14 +21,14 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.div`
-  @media (max-width: 1200px) {
+  @media (max-width: 900px) {
     display: flex;
     align-items: center;
   }
 `;
 
 const HeaderStrong = styled(Strong)`
-  @media (max-width: 1200px) {
+  @media (max-width: 900px) {
     text-align: center;
     flex-grow: 1;
   }
@@ -37,7 +37,7 @@ const HeaderStrong = styled(Strong)`
 const Content = styled.div`
   display: flex;
   margin-top: 1.5rem;
-  @media (max-width: 1200px) {
+  @media (max-width: 900px) {
     flex-wrap: wrap;
     background-color: #f4f7f9;
   }
@@ -46,8 +46,8 @@ const Content = styled.div`
 const InputSection = styled.div`
   background-color: #f4f7f9;
   border-radius: 10px;
-  padding: 1rem;
-  @media (max-width: 1200px) {
+  padding: var(--space-2);
+  @media (max-width: 900px) {
     flex-wrap: wrap;
     background-color: #ffff;
     box-shadow: 0px 5px 20px rgba(129, 129, 165, 0.15);
@@ -55,13 +55,13 @@ const InputSection = styled.div`
 `;
 
 const InputLabel = styled(Body4)`
-  margin-bottom: 1rem;
+  margin-bottom: var(--space-2);
 `;
 const Left = styled.div`
   flex: 1 1 50%;
   border-right: 1px solid #dbe3eb;
-  padding-right: 2rem;
-  @media (max-width: 1200px) {
+  padding-right: var(--space-3);
+  @media (max-width: 900px) {
     border-right: none;
     padding-right: 0;
     flex-basis: 100%;
@@ -70,7 +70,7 @@ const Left = styled.div`
 const Input = styled.input`
   border: 1px solid #dbe3eb;
   border-radius: 10px;
-  padding: 1rem;
+  padding: var(--space-2);
   font-family: inherit;
   font-size: 26px;
   font-weight: bold;
@@ -84,15 +84,15 @@ const InputLine = styled.div`
 `;
 
 const Currency = styled(Subtitle4)`
-  margin-left: 1rem;
+  margin-left: var(--space-2);
 `;
 
 const Right = styled.div`
   flex: 1 1 50%;
-  padding-left: 2rem;
-  @media (max-width: 1200px) {
+  padding-left: var(--space-3);
+  @media (max-width: 900px) {
     padding-left: 0;
-    margin-top: 1rem;
+    margin-top: var(--space-2);
     display: flex;
     justify-content: space-between;
   }
@@ -103,28 +103,28 @@ const StyledSmallP = styled(SmallP)`
 `;
 
 const StyledBody4 = styled(Body4)`
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-2);
 `;
 
 const Buttons = styled.div`
-  margin-top: 2rem;
+  margin-top: var(--space-3);
   display: flex;
   justify-content: center;
-  @media (max-width: 1200px) {
+  @media (max-width: 900px) {
     box-shadow: 0px -5px 20px rgba(194, 206, 219, 0.8);
-    padding: 1rem;
+    padding: var(--space-2);
   }
 `;
 
 const CancelButton = styled.div`
-  margin-right: 1rem;
+  margin-right: var(--space-2);
 `;
 
 const RightText = styled.div``;
 
 const RightButton = styled.div`
-  @media (max-width: 1200px) {
+  @media (max-width: 900px) {
     height: 30%;
   }
 `;
