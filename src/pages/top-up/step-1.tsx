@@ -7,29 +7,32 @@ import Card from '../../components/Card';
 import Header from '../../containers/Header';
 import { Label, P, Subtitle } from '../../components/Typography';
 import OvalButton from '../../components/OvalButton';
+import SecondaryButton from '../../components/SecondaryButton';
+import Button from '../../components/Button';
 
 const Content = styled.div`
   display: flex;
   @media (max-width: 900px) {
     flex-wrap: wrap;
-    background-color: #f4f7f9;
   }
 `;
 
-const InputSection = styled.div`
+const GraySection = styled.div`
   background-color: #f4f7f9;
   border-radius: 10px;
   padding: var(--space-2);
   @media (max-width: 900px) {
     flex-wrap: wrap;
-    background-color: #ffff;
-    box-shadow: 0px 5px 20px rgba(129, 129, 165, 0.15);
   }
 `;
 
-const InputLabel = styled(P)`
-  margin-bottom: var(--space-2);
+const GrayRowSection = styled(GraySection)`
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
+
 const Left = styled.div`
   flex: 1 1 50%;
   border-right: 1px solid #dbe3eb;
@@ -38,6 +41,7 @@ const Left = styled.div`
     border-right: none;
     padding-right: 0;
     flex-basis: 100%;
+    margin-bottom: var(--space-2);
   }
 `;
 
@@ -62,22 +66,29 @@ const Currency = styled(Subtitle)`
 `;
 
 const Right = styled.div`
+  display: flex;
+  flex-direction: column;
   flex: 1 1 50%;
   padding-left: var(--space-3);
   @media (max-width: 900px) {
     padding-left: 0;
-    margin-top: var(--space-2);
-    display: flex;
-    justify-content: space-between;
   }
 `;
 
-const RightText = styled.div``;
-
-const RightButton = styled.div`
+const Buttons = styled.div`
+  padding: var(--space-2);
+  display: flex;
+  justify-content: center;
   @media (max-width: 900px) {
-    height: 30%;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
   }
+`;
+
+const CancelButton = styled.div`
+  margin-right: var(--space-2);
 `;
 
 interface AmountFormValues {
@@ -97,11 +108,11 @@ const TopUpStep1Page: React.FunctionComponent = () => {
     <Section>
       <Header title="Top Up" />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Card title="Summary:">
+        <Card title="Summary">
           <Content>
             <Left>
-              <InputSection>
-                <InputLabel>Select amount to top up</InputLabel>
+              <Label>Select amount to top up</Label>
+              <GraySection>
                 <InputLine>
                   <Input
                     type="number"
@@ -110,19 +121,26 @@ const TopUpStep1Page: React.FunctionComponent = () => {
                   />
                   <Currency>£</Currency>
                 </InputLine>
-              </InputSection>
+              </GraySection>
             </Left>
             <Right>
-              <RightText>
+              <div>
                 <Label>Payment method</Label>
+              </div>
+              <GrayRowSection>
                 <P>Instant Bank Transfer</P>
-              </RightText>
-              <RightButton>
                 <OvalButton>Change</OvalButton>
-              </RightButton>
+              </GrayRowSection>
             </Right>
           </Content>
         </Card>
+
+        <Buttons>
+          <CancelButton>
+            <SecondaryButton>Cancel</SecondaryButton>
+          </CancelButton>
+          <Button type="submit">Continue</Button>
+        </Buttons>
       </form>
     </Section>
   );

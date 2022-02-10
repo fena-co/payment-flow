@@ -16,7 +16,7 @@ const CardWrapper = styled.section`
 const CardHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
 `;
 
 interface CardProps {
