@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Body4, SmallP, Strong, Subtitle4 } from '@/components/Typography';
 import styled from 'styled-components';
 import SecondaryButton from '@/components/SecondaryButton';
 import ButtonDefault from '@/components/ButtonDefault';
+import { useForm } from 'react-hook-form';
 import OvalButton from './OvalButton';
 import ButtonRound from './ButtonRound';
 
@@ -126,43 +127,60 @@ const RightButton = styled.div`
     height: 30%;
   }
 `;
-const TopUpPanel: React.FunctionComponent = () => (
-  <form>
-    <Wrapper>
-      <Header>
-        <ButtonRound> &lt; </ButtonRound>
-        <HeaderStrong>TOP UP SUMMARY:</HeaderStrong>
-      </Header>
-      <Content>
-        <Left>
-          <InputSection>
-            <InputLabel>Select amount to top up</InputLabel>
-            <InputLine>
-              <Input type="number" placeholder="0" />
-              <Pound>£</Pound>
-            </InputLine>
-          </InputSection>
-        </Left>
-        <Right>
-          <RightText>
-            <StyledSmallP className="accent-text-gray">
-              PAYMENT METHOD
-            </StyledSmallP>
-            <StyledBody4>Instant Bank Transfer</StyledBody4>
-          </RightText>
-          <RightButton>
-            <OvalButton>Change</OvalButton>
-          </RightButton>
-        </Right>
-      </Content>
-    </Wrapper>
-    <Buttons>
-      <CancelButton>
-        <SecondaryButton>Cancel</SecondaryButton>
-      </CancelButton>
-      <ButtonDefault disabled>Continue</ButtonDefault>
-    </Buttons>
-  </form>
-);
+const TopUpPanel: React.FunctionComponent = () => {
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => console.log(data);
+
+  const [inputVal, setInputVal] = useState(``);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputVal(e.target.value);
+  };
+  console.log(inputVal);
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Wrapper>
+        <Header>
+          <ButtonRound> &lt; </ButtonRound>
+          <HeaderStrong>TOP UP SUMMARY:</HeaderStrong>
+        </Header>
+        <Content>
+          <Left>
+            <InputSection>
+              <InputLabel>Select amount to top up</InputLabel>
+              <InputLine>
+                <Input
+                  onChange={handleChange}
+                  value={inputVal}
+                  type="number"
+                  placeholder="0"
+                  id="topUpSummary"
+                  {...register(`topUpSummary`)}
+                />
+                <Pound>£</Pound>
+              </InputLine>
+            </InputSection>
+          </Left>
+          <Right>
+            <RightText>
+              <StyledSmallP className="accent-text-gray">
+                PAYMENT METHOD
+              </StyledSmallP>
+              <StyledBody4>Instant Bank Transfer</StyledBody4>
+            </RightText>
+            <RightButton>
+              <OvalButton>Change</OvalButton>
+            </RightButton>
+          </Right>
+        </Content>
+      </Wrapper>
+      <Buttons>
+        <CancelButton>
+          <SecondaryButton>Cancel</SecondaryButton>
+        </CancelButton>
+        <ButtonDefault disabled={inputVal.length < 1}>Continue</ButtonDefault>
+      </Buttons>
+    </form>
+  );
+};
 
 export default TopUpPanel;
