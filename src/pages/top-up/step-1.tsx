@@ -99,10 +99,12 @@ const TopUpStep1Page: React.FunctionComponent = () => {
   const {
     register,
     handleSubmit,
-    // formState: { errors },
-  } = useForm<AmountFormValues>();
+    formState: { isDirty, isValid },
+  } = useForm<AmountFormValues>({ mode: `onChange` });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
   return (
     <Section>
@@ -117,7 +119,9 @@ const TopUpStep1Page: React.FunctionComponent = () => {
                   <Input
                     type="number"
                     placeholder="0"
-                    {...register(`amount`, { required: true, min: 1 })}
+                    min={0}
+                    step={0.01}
+                    {...register(`amount`, { required: true, min: 0.01 })}
                   />
                   <Currency>£</Currency>
                 </InputLine>
@@ -139,7 +143,9 @@ const TopUpStep1Page: React.FunctionComponent = () => {
           <CancelButton>
             <SecondaryButton>Cancel</SecondaryButton>
           </CancelButton>
-          <Button type="submit">Continue</Button>
+          <Button disabled={!isDirty || !isValid} type="submit">
+            Continue
+          </Button>
         </Buttons>
       </form>
     </Section>

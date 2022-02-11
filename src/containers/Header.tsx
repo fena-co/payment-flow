@@ -19,6 +19,7 @@ const Back = styled(Link)`
   justify-content: center;
   background-color: #13273f;
   text-decoration: none;
+  font-weight: bold;
   color: white;
   margin-right: var(--space-1);
 `;
