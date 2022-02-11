@@ -18,12 +18,14 @@
     "format": "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx)\" --write",
     "postinstall": "husky install",
     "test": "jest",
-    "commit": "cz"
+    "commit": "cz",
+    "lint-staged": "lint-staged",
+    "commitlint": "commitlint"
   },
   "lint-staged": {
     "./src/**/*.{ts,js,jsx,tsx}": [
-      "yarn lint --fix",
-      "yarn format"
+      "npm run lint --fix",
+      "npm run format"
     ]
   },
   "dependencies": {

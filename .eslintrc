@@ -31,7 +31,9 @@
     "import/prefer-default-export": "off",
     "react/prop-types": "off",
     "react/jsx-filename-extension": "off",
+    "react/require-default-props": "off",
     "react/jsx-props-no-spreading": "off",
+    "react/function-component-definition": "off",
     "import/no-extraneous-dependencies": [
       "error",
       {
@@ -52,8 +54,7 @@
         "js": "never",
         "jsx": "never"
       }
-    ],
-    "react/function-component-definition": "off"
+    ]
   },
   "overrides": [
     {
@@ -75,7 +76,6 @@
         "no-use-before-define": [0],
         "@typescript-eslint/no-use-before-define": [1],
         "import/no-unresolved": 0,
-        "react/require-default-props": 0,
         "import/no-extraneous-dependencies": [
           "error",
           {
