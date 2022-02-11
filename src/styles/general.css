@@ -3,6 +3,8 @@ body {
   --space-1: 0.5rem;
   --space-2: 1rem;
   --space-3: 2rem;
+  --space-4: 5rem;
+  --space-5: 10rem;
 
   /* colors */
   --dark-text: #13273f;
@@ -11,4 +13,11 @@ body {
 
 .accent-text-gray {
   color: var(--light-text) !important;
+}
+.accent-text-black {
+  color: var(--dark-text);
+}
+.accent-text-black-bold {
+  color: var(--dark-text);
+  font-weight: bold;
 }
