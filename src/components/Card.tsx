@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Strong } from './Typography';
 
@@ -16,7 +16,21 @@ const CardWrapper = styled.section`
 const CardHeader = styled.header`
   display: flex;
   justify-content: space-between;
-  margin-bottom: var(--space-3);
+  align-items: center;
+  margin-bottom: ${(props) =>
+    props[`aria-expanded`] ? `var(--space-3)` : `0`};
+`;
+
+const AccordionButton = styled.button`
+  transform: ${(props) =>
+    props[`aria-expanded`] ? `rotate(270deg)` : `rotateZ(90deg)`};
+  width: 30px;
+  height: 30px;
+  font-weight: bold;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border: none;
 `;
 
 interface CardProps {
@@ -28,14 +42,29 @@ const Card: React.FunctionComponent<CardProps> = ({
   title,
   isAccordion,
   children,
-}) => (
-  <CardWrapper>
-    <CardHeader>
-      <Strong>{title}</Strong>
-      {isAccordion && <button type="button">X</button>}
-    </CardHeader>
-    {children}
-  </CardWrapper>
-);
+}) => {
+  const [isExpanded, setExpanded] = useState(false);
+  const handleTriggerClick = () => {
+    setExpanded(!isExpanded);
+  };
+
+  return (
+    <CardWrapper>
+      <CardHeader aria-expanded={!isAccordion || isExpanded}>
+        <Strong>{title}</Strong>
+        {isAccordion && (
+          <AccordionButton
+            type="button"
+            aria-expanded={isExpanded}
+            onClick={handleTriggerClick}
+          >
+            &gt;
+          </AccordionButton>
+        )}
+      </CardHeader>
+      {(!isAccordion || isExpanded) && children}
+    </CardWrapper>
+  );
+};
 
 export default Card;

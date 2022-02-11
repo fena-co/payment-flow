@@ -7,7 +7,21 @@ import Card from '../../components/Card';
 const TopUpStep2Page: React.FunctionComponent = () => (
   <Section>
     <Header title="Bank Select" backUrl="/top-up/step-1" />
-    <Card title="Summary">Test</Card>
+    <Card title="Summary" isAccordion>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia optio
+      adipisci vel maxime, inventore magni alias? Consequuntur cupiditate
+      repellat fuga autem. Hic inventore sapiente aut sint quos dicta quibusdam
+      non. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+      optio adipisci vel maxime, inventore magni alias? Consequuntur cupiditate
+      repellat fuga autem. Hic inventore sapiente aut sint quos dicta quibusdam
+      non. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+      optio adipisci vel maxime, inventore magni alias? Consequuntur cupiditate
+      repellat fuga autem. Hic inventore sapiente aut sint quos dicta quibusdam
+      non. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia
+      optio adipisci vel maxime, inventore magni alias? Consequuntur cupiditate
+      repellat fuga autem. Hic inventore sapiente aut sint quos dicta quibusdam
+      non.
+    </Card>
   </Section>
 );
 
