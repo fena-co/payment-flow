@@ -3,7 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
-  background-color: rgb(19, 39, 63);
+  background-color: ${(props) =>
+    props.disabled ? `#DBE3EB` : `rgb(19, 39, 63)`};
   background-size: cover;
   border-radius: 5px;
   padding: ${(props) =>
@@ -16,7 +17,8 @@ export const StyledButton = styled.button`
   border: none;
   cursor: pointer;
   &:hover {
-    background-color: rgb(25, 56, 93);
+    background-color: ${(props) =>
+      props.disabled ? `#DBE3EB` : `rgb(25, 56, 93)`};
   }
 `;
 
