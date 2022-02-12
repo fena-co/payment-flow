@@ -6,6 +6,8 @@ const CardWrapper = styled.section`
   background-color: #fff;
   border-radius: 10px;
   padding: var(--space-3);
+  margin-bottom: var(--space-2);
+  box-shadow: 0px 2px 15px rgba(108, 108, 138, 0.15);
   /* @media (max-width: 900px) {
     flex-wrap: wrap;
     background-color: #fff;

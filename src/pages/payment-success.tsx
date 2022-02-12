@@ -1,6 +1,7 @@
 import Button from '@/components/Button';
+import PaymentDetails from '@/components/PaymentDetails';
 import Section from '@/components/Section';
-import { P, SmallP, Subtitle } from '@/components/Typography';
+import { SmallP, Subtitle } from '@/components/Typography';
 import React from 'react';
 import styled from 'styled-components';
 import tick from '../assets/icons/ready.svg';
@@ -45,12 +46,6 @@ const Bottom = styled.div`
   padding-top: var(--space-3);
 `;
 
-const PaymentItem = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: var(--space-1);
-`;
-
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -81,21 +76,7 @@ const PaymentSuccessPage: React.FunctionComponent = () => {
           <SmallP className="accent-text-gray">{mock.date}</SmallP>
         </Top>
         <Bottom>
-          <PaymentItem>
-            <P className="accent-text-gray">Payment amount:</P>
-            <span className="accent-text-black-bold">
-              £{` `}
-              {mock.amount}
-            </span>
-          </PaymentItem>
-          <PaymentItem className="accent-text-gray">
-            <P className="accent-text-gray">Deposit to:</P>
-            <span className="accent-text-black">{mock.depositTo}</span>
-          </PaymentItem>
-          <PaymentItem className="accent-text-gray">
-            <P className="accent-text-gray">Payment method:</P>
-            <span className="accent-text-black">{mock.paymentMethod}</span>
-          </PaymentItem>
+          <PaymentDetails content={{ mock }} />
         </Bottom>
         <ButtonWrapper>
           <Button>Done</Button>
