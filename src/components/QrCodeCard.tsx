@@ -5,7 +5,7 @@ import qrCodeIcon from '../assets/icons/greenQrCode.svg';
 import bankIcon from '../assets/icons/yellowBank.svg';
 import { P } from './Typography';
 
-const CardWrapper = styled.section`
+const CardWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -27,6 +27,7 @@ const QrCodeHintItem = styled.div`
 const QrCodeIcon = styled.img`
   margin-right: var(--space-2);
 `;
+
 const QrCodeCard: React.FunctionComponent = () => {
   return (
     <CardWrapper>

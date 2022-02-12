@@ -5,8 +5,7 @@ import Header from '../../containers/Header';
 import Card from '../../components/Card';
 import PaymentDetails from '@/components/PaymentDetails';
 import QrCodeCard from '@/components/QrCodeCard';
-
-
+import BankSelect from '@/components/BankSelect';
 
 const TopUpStep2Page: React.FunctionComponent = () => {
   const mock = {
@@ -25,19 +24,7 @@ const TopUpStep2Page: React.FunctionComponent = () => {
         <QrCodeCard />
       </Card>
       <Card title="Can't scan the QR code?" isAccordion>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Mollitia optio
-        adipisci vel maxime, inventore magni alias? Consequuntur cupiditate
-        repellat fuga autem. Hic inventore sapiente aut sint quos dicta
-        quibusdam non. Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-        Mollitia optio adipisci vel maxime, inventore magni alias? Consequuntur
-        cupiditate repellat fuga autem. Hic inventore sapiente aut sint quos
-        dicta quibusdam non. Lorem, ipsum dolor sit amet consectetur adipisicing
-        elit. Mollitia optio adipisci vel maxime, inventore magni alias?
-        Consequuntur cupiditate repellat fuga autem. Hic inventore sapiente aut
-        sint quos dicta quibusdam non. Lorem, ipsum dolor sit amet consectetur
-        adipisicing elit. Mollitia optio adipisci vel maxime, inventore magni
-        alias? Consequuntur cupiditate repellat fuga autem. Hic inventore
-        sapiente aut sint quos dicta quibusdam non.
+        <BankSelect />
       </Card>
     </Section>
   );
