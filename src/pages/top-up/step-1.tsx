@@ -102,8 +102,8 @@ const TopUpStep1Page: React.FunctionComponent = () => {
     formState: { isDirty, isValid },
   } = useForm<AmountFormValues>({ mode: `onChange` });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = () => {
+    // console.log(data);
   };
 
   return (

@@ -10,4 +10,5 @@ const Section = styled.section`
     padding: 3rem var(--space-2);
   }
 `;
+
 export default Section;

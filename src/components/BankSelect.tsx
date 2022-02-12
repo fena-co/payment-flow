@@ -10,23 +10,21 @@ const Search = styled.input`
 
 const Banks = styled.div``;
 
-const BankButtonLabel = styled.label``;
-const BankButton = styled.input``;
+// const BankButtonLabel = styled.label``;
+// const BankButton = styled.input``;
 
-const QrCodeIcon = styled.img`
-  margin-right: var(--space-2);
-`;
+// const QrCodeIcon = styled.img`
+//   margin-right: var(--space-2);
+// `;
 
-const BankSelect: React.FunctionComponent = () => {
-  return (
-    <CardWrapper>
-      <LabelLoweCase>Pay with online banking</LabelLoweCase>
-      <form>
-        <Search type="text" placeholder="Select all banks" />
-        <Banks>button</Banks>
-      </form>
-    </CardWrapper>
-  );
-};
+const BankSelect: React.FunctionComponent = () => (
+  <CardWrapper>
+    <LabelLoweCase>Pay with online banking</LabelLoweCase>
+    <form>
+      <Search type="text" placeholder="Select all banks" />
+      <Banks>button</Banks>
+    </form>
+  </CardWrapper>
+);
 
 export default BankSelect;

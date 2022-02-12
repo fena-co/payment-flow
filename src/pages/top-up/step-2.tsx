@@ -1,11 +1,11 @@
 import React from 'react';
 
 import Section from '@/components/Section';
-import Header from '../../containers/Header';
-import Card from '../../components/Card';
 import PaymentDetails from '@/components/PaymentDetails';
 import QrCodeCard from '@/components/QrCodeCard';
 import BankSelect from '@/components/BankSelect';
+import Card from '../../components/Card';
+import Header from '../../containers/Header';
 
 const TopUpStep2Page: React.FunctionComponent = () => {
   const mock = {

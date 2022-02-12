@@ -23,26 +23,24 @@ interface PaymentDetailsCardProps {
 }
 const PaymentDetails: React.FunctionComponent<PaymentDetailsCardProps> = ({
   content: { mock },
-}) => {
-  return (
-    <CardWrapper>
-      <PaymentItem>
-        <P className="accent-text-gray">Payment amount:</P>
-        <span className="accent-text-black-bold">
-          £{` `}
-          {mock.amount}
-        </span>
-      </PaymentItem>
-      <PaymentItem className="accent-text-gray">
-        <P className="accent-text-gray">Deposit to:</P>
-        <span className="accent-text-black">{mock.depositTo}</span>
-      </PaymentItem>
-      <PaymentItem className="accent-text-gray">
-        <P className="accent-text-gray">Payment method:</P>
-        <span className="accent-text-black">{mock.paymentMethod}</span>
-      </PaymentItem>
-    </CardWrapper>
-  );
-};
+}) => (
+  <CardWrapper>
+    <PaymentItem>
+      <P className="accent-text-gray">Payment amount:</P>
+      <span className="accent-text-black-bold">
+        £{` `}
+        {mock.amount}
+      </span>
+    </PaymentItem>
+    <PaymentItem className="accent-text-gray">
+      <P className="accent-text-gray">Deposit to:</P>
+      <span className="accent-text-black">{mock.depositTo}</span>
+    </PaymentItem>
+    <PaymentItem className="accent-text-gray">
+      <P className="accent-text-gray">Payment method:</P>
+      <span className="accent-text-black">{mock.paymentMethod}</span>
+    </PaymentItem>
+  </CardWrapper>
+);
 
 export default PaymentDetails;

@@ -20,7 +20,7 @@ const QrCodeHintItem = styled.div`
   display: flex;
   align-items: center;
   &:first-child {
-    margin-bottom: var(--space-2)
+    margin-bottom: var(--space-2);
   }
 `;
 
@@ -28,22 +28,20 @@ const QrCodeIcon = styled.img`
   margin-right: var(--space-2);
 `;
 
-const QrCodeCard: React.FunctionComponent = () => {
-  return (
-    <CardWrapper>
-      <QrCodeImg src={qrCodeImage} alt="qr code image" />
-      <Items>
-        <QrCodeHintItem>
-          <QrCodeIcon src={qrCodeIcon} alt="qr code icon" />
-          <P>Scan QR Code to open checkout link</P>
-        </QrCodeHintItem>
-        <QrCodeHintItem>
-          <QrCodeIcon src={bankIcon} alt="qr code icon" />
-          <P>Select bank to pay with</P>
-        </QrCodeHintItem>
-      </Items>
-    </CardWrapper>
-  );
-};
+const QrCodeCard: React.FunctionComponent = () => (
+  <CardWrapper>
+    <QrCodeImg src={qrCodeImage} alt="qr code image" />
+    <Items>
+      <QrCodeHintItem>
+        <QrCodeIcon src={qrCodeIcon} alt="qr code icon" />
+        <P>Scan QR Code to open checkout link</P>
+      </QrCodeHintItem>
+      <QrCodeHintItem>
+        <QrCodeIcon src={bankIcon} alt="qr code icon" />
+        <P>Select bank to pay with</P>
+      </QrCodeHintItem>
+    </Items>
+  </CardWrapper>
+);
 
 export default QrCodeCard;
