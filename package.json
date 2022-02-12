@@ -23,7 +23,7 @@
     "commitlint": "commitlint"
   },
   "lint-staged": {
-    "./src/**/*.{ts,js,jsx,tsx}": [
+    "*.{ts,js,jsx,tsx}": [
       "npm run lint --fix",
       "npm run format"
     ]
