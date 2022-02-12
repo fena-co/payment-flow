@@ -101,7 +101,7 @@ const BankSelect: React.FunctionComponent = () => (
         </BankButtonLabel>
         <BankButtonLabel>
           <BankIcon src={nationwide} alt="bank icon" />
-          Nationwide
+          Test
           <BankButton type="radio" name="bank" />
         </BankButtonLabel>
       </Banks>
