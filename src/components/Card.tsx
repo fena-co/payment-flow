@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { P, Strong } from './Typography';
+import { Strong } from './Typography';
 
 const CardWrapper = styled.section`
   background-color: #fff;
@@ -35,26 +35,12 @@ const AccordionButton = styled.button`
   border: none;
 `;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-`;
-
-const PaymentDeatils = styled(P)`
-  width: 100%;
-`;
-
 interface CardProps {
-  amount?: string;
-  depositTo?: string;
-  title: string;
+  title: string | JSX.Element;
   isAccordion?: boolean;
 }
 
 const Card: React.FunctionComponent<CardProps> = ({
-  amount,
-  depositTo,
   title,
   isAccordion,
   children,
@@ -67,32 +53,15 @@ const Card: React.FunctionComponent<CardProps> = ({
   return (
     <CardWrapper>
       <CardHeader aria-expanded={!isAccordion || isExpanded}>
-        <Strong>{title}</Strong>
-        {isExpanded ||
-          (amount && depositTo && (
-            <PaymentDeatils>
-              <span className="accent-text-black-bold">:</span> {` `} Pay
-              {` `}
-              <span className="accent-text-black-bold">
-                £ {` `}
-                {amount}
-              </span>
-              {` `}
-              to
-              {` `}
-              {depositTo}
-            </PaymentDeatils>
-          ))}
+        {typeof title === `string` ? <Strong>{title}</Strong> : title}
         {isAccordion && (
-          <ButtonWrapper>
-            <AccordionButton
-              type="button"
-              aria-expanded={isExpanded}
-              onClick={handleTriggerClick}
-            >
-              &gt;
-            </AccordionButton>
-          </ButtonWrapper>
+          <AccordionButton
+            type="button"
+            aria-expanded={isExpanded}
+            onClick={handleTriggerClick}
+          >
+            &gt;
+          </AccordionButton>
         )}
       </CardHeader>
       {(!isAccordion || isExpanded) && children}

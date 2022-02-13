@@ -4,6 +4,7 @@ import Section from '@/components/Section';
 import PaymentDetails from '@/components/PaymentDetails';
 import QrCodeCard from '@/components/QrCodeCard';
 import BankSelect from '@/components/BankSelect';
+import { Strong } from '@/components/Typography';
 import Card from '../../components/Card';
 import Header from '../../containers/Header';
 
@@ -18,9 +19,21 @@ const TopUpStep2Page: React.FunctionComponent = () => {
     <Section>
       <Header title="Bank Select" backUrl="/top-up/step-1" />
       <Card
-        amount={mock.amount}
-        depositTo={mock.depositTo}
-        title="Summary"
+        title={
+          <>
+            <Strong>Summary: </Strong>
+            Pay
+            {` `}
+            <span className="accent-text-black-bold">
+              £ {` `}
+              {mock.amount}
+            </span>
+            {` `}
+            to
+            {` `}
+            {mock.depositTo}
+          </>
+        }
         isAccordion
       >
         <PaymentDetails content={{ mock }} />
