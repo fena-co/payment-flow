@@ -17,7 +17,12 @@ const TopUpStep2Page: React.FunctionComponent = () => {
   return (
     <Section>
       <Header title="Bank Select" backUrl="/top-up/step-1" />
-      <Card title="Summary" isAccordion>
+      <Card
+        amount={mock.amount}
+        depositTo={mock.depositTo}
+        title="Summary"
+        isAccordion
+      >
         <PaymentDetails content={{ mock }} />
       </Card>
       <Card title="Scan the QR code with your phone " isAccordion>

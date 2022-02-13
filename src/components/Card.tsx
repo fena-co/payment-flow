@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Strong } from './Typography';
+import { P, Strong } from './Typography';
 
 const CardWrapper = styled.section`
   background-color: #fff;
@@ -17,7 +17,7 @@ const CardWrapper = styled.section`
 
 const CardHeader = styled.header`
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   align-items: center;
   margin-bottom: ${(props) =>
     props[`aria-expanded`] ? `var(--space-3)` : `0`};
@@ -35,12 +35,26 @@ const AccordionButton = styled.button`
   border: none;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+`;
+
+const PaymentDeatils = styled(P)`
+  width: 100%;
+`;
+
 interface CardProps {
+  amount?: string;
+  depositTo?: string;
   title: string;
   isAccordion?: boolean;
 }
 
 const Card: React.FunctionComponent<CardProps> = ({
+  amount,
+  depositTo,
   title,
   isAccordion,
   children,
@@ -54,14 +68,31 @@ const Card: React.FunctionComponent<CardProps> = ({
     <CardWrapper>
       <CardHeader aria-expanded={!isAccordion || isExpanded}>
         <Strong>{title}</Strong>
+        {isExpanded ||
+          (amount && depositTo && (
+            <PaymentDeatils>
+              <span className="accent-text-black-bold">:</span> {` `} Pay
+              {` `}
+              <span className="accent-text-black-bold">
+                £ {` `}
+                {amount}
+              </span>
+              {` `}
+              to
+              {` `}
+              {depositTo}
+            </PaymentDeatils>
+          ))}
         {isAccordion && (
-          <AccordionButton
-            type="button"
-            aria-expanded={isExpanded}
-            onClick={handleTriggerClick}
-          >
-            &gt;
-          </AccordionButton>
+          <ButtonWrapper>
+            <AccordionButton
+              type="button"
+              aria-expanded={isExpanded}
+              onClick={handleTriggerClick}
+            >
+              &gt;
+            </AccordionButton>
+          </ButtonWrapper>
         )}
       </CardHeader>
       {(!isAccordion || isExpanded) && children}
