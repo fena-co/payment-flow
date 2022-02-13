@@ -19,7 +19,8 @@ const TopUpStep2Page: React.FunctionComponent = () => {
     <Section>
       <Header title="Bank Select" backUrl="/top-up/step-1" />
       <Card
-        title={
+        title="Summary: "
+        collapsedTitle={
           <>
             <Strong>Summary: </Strong>
             Pay

@@ -53,7 +53,6 @@ const Input = styled.input`
   font-size: 26px;
   font-weight: bold;
   color: black;
-  width: 100%;
 `;
 
 const InputLine = styled.div`
