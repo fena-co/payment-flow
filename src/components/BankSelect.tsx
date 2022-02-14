@@ -24,8 +24,7 @@ const CardLabel = styled(LabelLoweCase)`
 
 const Search = styled.input`
   display: ${(props) => (props.hidden ? `none` : `initial`)};
-  /* flex-basis: 100%; */
-  width: 100%;
+  flex-basis: 100%;
   padding: var(--space-2);
   background-color: #f4f7f9;
   border: 1px solid #dbe3eb;

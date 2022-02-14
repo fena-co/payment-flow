@@ -37,6 +37,7 @@ export const SmallP = styled(P)`
 
 export const Strong = styled(P)`
   font-weight: bold;
+  display: inline;
 `;
 
 export const Subtitle = styled(P)`

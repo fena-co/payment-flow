@@ -17,10 +17,14 @@ const CardWrapper = styled.section`
 
 const CardHeader = styled.header`
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
+  justify-content: space-between;
   margin-bottom: ${(props) =>
     props[`aria-expanded`] ? `var(--space-3)` : `0`};
+`;
+
+const CardTitleWrapper = styled.div`
+  flex: 1 0 auto;
 `;
 
 const AccordionButton = styled.button`
@@ -35,13 +39,18 @@ const AccordionButton = styled.button`
   border: none;
 `;
 
+const CardTitle: React.FunctionComponent<any> = ({ children }) =>
+  typeof children === `string` ? <Strong>{children}</Strong> : children;
+
 interface CardProps {
   title: string | JSX.Element;
+  collapsedTitle?: string | JSX.Element;
   isAccordion?: boolean;
 }
 
 const Card: React.FunctionComponent<CardProps> = ({
   title,
+  collapsedTitle,
   isAccordion,
   children,
 }) => {
@@ -53,7 +62,14 @@ const Card: React.FunctionComponent<CardProps> = ({
   return (
     <CardWrapper>
       <CardHeader aria-expanded={!isAccordion || isExpanded}>
-        {typeof title === `string` ? <Strong>{title}</Strong> : title}
+        <CardTitleWrapper>
+          {!isExpanded ? (
+            <CardTitle>{collapsedTitle || title}</CardTitle>
+          ) : (
+            <CardTitle>{title}</CardTitle>
+          )}
+        </CardTitleWrapper>
+
         {isAccordion && (
           <AccordionButton
             type="button"
