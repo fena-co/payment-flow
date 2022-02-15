@@ -140,6 +140,7 @@ const BankSelect: React.FunctionComponent = () => {
           {!activeBank ? (
             banks.map((bank) => (
               <BankListItem
+                key={bank.label}
                 onClick={() => handleBankClick(bank.label)}
                 {...bank}
               />

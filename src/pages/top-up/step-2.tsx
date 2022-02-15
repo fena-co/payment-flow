@@ -25,7 +25,6 @@ const Buttons = styled.div`
   display: flex;
   justify-content: center;
   @media (max-width: 900px) {
-    position: fixed;
     bottom: 0;
     right: 0;
     left: 0;

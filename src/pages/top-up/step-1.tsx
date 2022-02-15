@@ -21,9 +21,6 @@ const GraySection = styled.div`
   background-color: #f4f7f9;
   border-radius: 10px;
   padding: var(--space-2);
-  @media (max-width: 900px) {
-    flex-wrap: wrap;
-  }
 `;
 
 const GrayRowSection = styled(GraySection)`
@@ -53,6 +50,10 @@ const Input = styled.input`
   font-size: 26px;
   font-weight: bold;
   color: black;
+
+  @media (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 const InputLine = styled.div`

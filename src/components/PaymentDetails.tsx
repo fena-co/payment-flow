@@ -10,6 +10,10 @@ const PaymentItem = styled.div`
   margin-bottom: var(--space-1);
 `;
 
+const Span = styled.span`
+  text-align: right;
+`;
+
 interface Mock {
   mock: {
     date: string;
@@ -27,18 +31,18 @@ const PaymentDetails: React.FunctionComponent<PaymentDetailsCardProps> = ({
   <CardWrapper>
     <PaymentItem>
       <P className="accent-text-gray">Payment amount:</P>
-      <span className="accent-text-black-bold">
+      <Span className="accent-text-black-bold">
         £{` `}
         {mock.amount}
-      </span>
+      </Span>
     </PaymentItem>
     <PaymentItem className="accent-text-gray">
       <P className="accent-text-gray">Deposit to:</P>
-      <span className="accent-text-black">{mock.depositTo}</span>
+      <Span className="accent-text-black">{mock.depositTo}</Span>
     </PaymentItem>
-    <PaymentItem className="accent-text-gray">
+    <PaymentItem>
       <P className="accent-text-gray">Payment method:</P>
-      <span className="accent-text-black">{mock.paymentMethod}</span>
+      <Span className="accent-text-black">{mock.paymentMethod}</Span>
     </PaymentItem>
   </CardWrapper>
 );
