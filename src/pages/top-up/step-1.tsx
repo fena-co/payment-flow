@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 
-import Section from '@/components/Section';
+import Section from '@/components/Layout';
 import Card from '../../components/Card';
 import Header from '../../containers/Header';
 import { Label, P, Subtitle } from '../../components/Typography';

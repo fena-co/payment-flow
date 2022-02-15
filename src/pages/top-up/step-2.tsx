@@ -1,6 +1,8 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import Section from '@/components/Section';
+import SecondaryButton from '@/components/SecondaryButton';
+import Button from '@/components/Button';
+import Section from '@/components/Layout';
 import PaymentDetails from '@/components/PaymentDetails';
 import QrCodeCard from '@/components/QrCodeCard';
 import BankSelect from '@/components/BankSelect';
@@ -16,6 +18,22 @@ const responsiveCSS = css`
 
 const ResponsiveCard = styled.div`
   ${responsiveCSS}
+`;
+
+const Buttons = styled.div`
+  padding: var(--space-2);
+  display: flex;
+  justify-content: center;
+  @media (max-width: 900px) {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
+`;
+
+const CancelButton = styled.div`
+  margin-right: var(--space-2);
 `;
 
 const TopUpStep2Page: React.FunctionComponent = () => {
@@ -62,6 +80,12 @@ const TopUpStep2Page: React.FunctionComponent = () => {
       <Card title={mock.respnsiveTitle} isAccordion>
         <BankSelect />
       </Card>
+      <Buttons>
+        <CancelButton>
+          <SecondaryButton>Cancel</SecondaryButton>
+        </CancelButton>
+        <Button>Continue</Button>
+      </Buttons>
     </Section>
   );
 };

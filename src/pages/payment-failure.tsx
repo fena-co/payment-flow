@@ -1,6 +1,6 @@
 import Button from '@/components/Button';
 import SecondaryButton from '@/components/SecondaryButton';
-import Section from '@/components/Section';
+import Section from '@/components/Layout';
 import { P, Subtitle } from '@/components/Typography';
 import React from 'react';
 import styled from 'styled-components';

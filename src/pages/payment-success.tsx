@@ -1,6 +1,6 @@
 import Button from '@/components/Button';
 import PaymentDetails from '@/components/PaymentDetails';
-import Section from '@/components/Section';
+import Section from '@/components/Layout';
 import { SmallP, Subtitle } from '@/components/Typography';
 import React from 'react';
 import styled from 'styled-components';
