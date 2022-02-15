@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import SecondaryButton from '@/components/SecondaryButton';
 import Button from '@/components/Button';
-import Section from '@/components/Layout';
 import PaymentDetails from '@/components/PaymentDetails';
 import QrCodeCard from '@/components/QrCodeCard';
 import BankSelect from '@/components/BankSelect';
 import { SmallP, Strong } from '@/components/Typography';
+import Layout from '@/components/Layout';
 import Card from '../../components/Card';
 import Header from '../../containers/Header';
 
-const responsiveCSS = css`
+const ResponsiveCard = styled.div`
   @media (max-width: 900px) {
     display: none;
   }
-`;
-
-const ResponsiveCard = styled.div`
-  ${responsiveCSS}
 `;
 
 const Buttons = styled.div`
@@ -59,7 +55,7 @@ const TopUpStep2Page: React.FunctionComponent = () => {
     useState<{ label: string; logo: string }>();
 
   return (
-    <Section>
+    <Layout>
       <Header title="Bank Select" backUrl="/top-up/step-1" />
       <Card
         title="Summary"
@@ -80,7 +76,7 @@ const TopUpStep2Page: React.FunctionComponent = () => {
         }
         isAccordion
       >
-        <PaymentDetails content={{ mock }} />
+        <PaymentDetails {...{ mock }} />
       </Card>
 
       <ResponsiveCard>
@@ -117,7 +113,7 @@ const TopUpStep2Page: React.FunctionComponent = () => {
         </CancelButton>
         <Button disabled={!activeBank}>Continue</Button>
       </Buttons>
-    </Section>
+    </Layout>
   );
 };
 

@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { Strong } from './Typography';
-
-const responsiveCSS = css`
-  @media (max-width: 900px) {
-    display: none;
-  }
-`;
 
 const CardWrapper = styled.section`
   background-color: #fff;
@@ -29,7 +23,6 @@ const CardTitleWrapper = styled.div`
 `;
 
 const AccordionButton = styled.button`
-  ${responsiveCSS}
   transform: ${(props) =>
     props[`aria-expanded`] ? `rotate(270deg)` : `rotateZ(90deg)`};
   width: 30px;
@@ -39,6 +32,9 @@ const AccordionButton = styled.button`
   background-color: white;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   border: none;
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
 const CardTitle: React.FunctionComponent<any> = ({ children }) =>

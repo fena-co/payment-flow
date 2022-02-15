@@ -1,6 +1,6 @@
 import Button from '@/components/Button';
+import Layout from '@/components/Layout';
 import PaymentDetails from '@/components/PaymentDetails';
-import Section from '@/components/Layout';
 import { SmallP, Subtitle } from '@/components/Typography';
 import React from 'react';
 import styled from 'styled-components';
@@ -66,7 +66,7 @@ const PaymentSuccessPage: React.FunctionComponent = () => {
     paymentMethod: `Instant Bank Transfer`,
   };
   return (
-    <Section>
+    <Layout>
       <Wrapper>
         <Top>
           <Circle>
@@ -76,13 +76,13 @@ const PaymentSuccessPage: React.FunctionComponent = () => {
           <SmallP className="accent-text-gray">{mock.date}</SmallP>
         </Top>
         <Bottom>
-          <PaymentDetails content={{ mock }} />
+          <PaymentDetails {...{ mock }} />
         </Bottom>
         <ButtonWrapper>
           <Button>Done</Button>
         </ButtonWrapper>
       </Wrapper>
-    </Section>
+    </Layout>
   );
 };
 

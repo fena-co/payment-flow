@@ -1,6 +1,6 @@
 import Button from '@/components/Button';
+import Layout from '@/components/Layout';
 import SecondaryButton from '@/components/SecondaryButton';
-import Section from '@/components/Layout';
 import { P, Subtitle } from '@/components/Typography';
 import React from 'react';
 import styled from 'styled-components';
@@ -76,7 +76,7 @@ const SecondaryButtonWrapper = styled.div`
   margin-right: var(--space-1);
 `;
 const PaymentSuccessPage: React.FunctionComponent = () => (
-  <Section>
+  <Layout>
     <Wrapper>
       <Top>
         <Circle>
@@ -109,7 +109,7 @@ const PaymentSuccessPage: React.FunctionComponent = () => (
         <Button>Try again</Button>
       </ButtonWrapper>
     </Wrapper>
-  </Section>
+  </Layout>
 );
 
 export default PaymentSuccessPage;

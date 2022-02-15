@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-
-import Section from '@/components/Layout';
+import Layout from '@/components/Layout';
 import Card from '../../components/Card';
 import Header from '../../containers/Header';
 import { Label, P, Subtitle } from '../../components/Typography';
@@ -107,7 +106,7 @@ const TopUpStep1Page: React.FunctionComponent = () => {
   };
 
   return (
-    <Section>
+    <Layout>
       <Header title="Top Up" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Card title="Summary">
@@ -148,7 +147,7 @@ const TopUpStep1Page: React.FunctionComponent = () => {
           </Button>
         </Buttons>
       </form>
-    </Section>
+    </Layout>
   );
 };
 

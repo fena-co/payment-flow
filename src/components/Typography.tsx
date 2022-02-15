@@ -26,7 +26,7 @@ export const Label = styled.label`
   text-transform: uppercase;
 `;
 
-export const LabelLoweCase = styled(Label)`
+export const LabelLowerCase = styled(Label)`
   text-transform: none;
   font-size: 100%;
 `;

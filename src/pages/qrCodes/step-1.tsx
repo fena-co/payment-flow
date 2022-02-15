@@ -1,23 +1,19 @@
 import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import SecondaryButton from '@/components/SecondaryButton';
 import Button from '@/components/Button';
-import Section from '@/components/Layout';
 import PaymentDetails from '@/components/PaymentDetails';
 import QrCodeCard from '@/components/QrCodeCard';
 import BankSelect from '@/components/BankSelect';
-import { SmallP, Strong } from '@/components/Typography';
+import { P, SmallP, Strong } from '@/components/Typography';
+import Layout from '@/components/Layout';
 import Card from '../../components/Card';
 import Header from '../../containers/Header';
 
-const responsiveCSS = css`
+const ResponsiveCard = styled.div`
   @media (max-width: 900px) {
     display: none;
   }
-`;
-
-const ResponsiveCard = styled.div`
-  ${responsiveCSS}
 `;
 
 const Buttons = styled.div`
@@ -45,7 +41,7 @@ const Link = styled.a`
   color: #38b6ff;
 `;
 
-const EcommercePage: React.FunctionComponent = () => {
+const QrCodesPage: React.FunctionComponent = () => {
   const mock = {
     respnsiveTitle:
       window.innerWidth < 900 ? `Select your bank` : `Can't scan the QR code?`,
@@ -53,14 +49,17 @@ const EcommercePage: React.FunctionComponent = () => {
     amount: `50`,
     depositTo: `Coinbase`,
     paymentMethod: `Instant Bank Transfer`,
+    accountNumber: `10987654321`,
+    sortCode: `20-00-00`,
+    paymentReference: `MODE8e7af35f2ca41E`,
   };
 
   const [activeBank, setActiveBank] =
     useState<{ label: string; logo: string }>();
 
   return (
-    <Section>
-      <Header title="Bank Select" backUrl="/top-up/step-1" />
+    <Layout>
+      <Header title="Bank Select" />
       <Card
         title="Summary"
         collapsedTitle={
@@ -80,7 +79,14 @@ const EcommercePage: React.FunctionComponent = () => {
         }
         isAccordion
       >
-        <PaymentDetails content={{ mock }} />
+        <PaymentDetails {...{ mock }} />
+      </Card>
+
+      <Card title="Comment" isAccordion>
+        <P>
+          This is a custom message for the payer if a message is inputted from
+          the app.
+        </P>
       </Card>
 
       <ResponsiveCard>
@@ -117,8 +123,8 @@ const EcommercePage: React.FunctionComponent = () => {
         </CancelButton>
         <Button disabled={!activeBank}>Continue</Button>
       </Buttons>
-    </Section>
+    </Layout>
   );
 };
 
-export default EcommercePage;
+export default QrCodesPage;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LabelLoweCase, SmallP } from './Typography';
+import { LabelLowerCase, SmallP } from './Typography';
 import starling from '../assets/icons/starling.svg';
 import nationwide from '../assets/icons/nationwide.svg';
 import santander from '../assets/icons/santander.svg';
@@ -19,7 +19,7 @@ import BankListItem from './BankListItem';
 
 const CardWrapper = styled.section``;
 
-const CardLabel = styled(LabelLoweCase)`
+const CardLabel = styled(LabelLowerCase)`
   margin-bottom: var(--space-2);
 `;
 
@@ -100,14 +100,6 @@ const BankSelect: React.FunctionComponent<BankSelectProps> = ({
     setActiveBank(undefined);
   };
 
-  let responsiveElement;
-
-  if (window.innerWidth < 900) {
-    responsiveElement = true;
-  } else {
-    responsiveElement = false;
-  }
-
   return (
     <CardWrapper>
       {activeBank && (
@@ -118,15 +110,15 @@ const BankSelect: React.FunctionComponent<BankSelectProps> = ({
           </BannerText>
         </Banner>
       )}
-      {!activeBank &&
-        (responsiveElement ? (
+      {!activeBank && (
+        <>
+          <CardLabel>Pay with online banking</CardLabel>
           <CardLabel>
             We&#39;ll automatically send you to your bank to approve the fast
             and secure payment
           </CardLabel>
-        ) : (
-          <CardLabel>Pay with online banking</CardLabel>
-        ))}
+        </>
+      )}
 
       <Banks>
         {!activeBank && (

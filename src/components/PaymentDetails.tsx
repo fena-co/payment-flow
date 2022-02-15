@@ -14,7 +14,7 @@ const Span = styled.span`
   text-align: right;
 `;
 
-interface Mock {
+interface PaymentDetailsCardProps {
   mock: {
     date: string;
     amount: string;
@@ -25,11 +25,8 @@ interface Mock {
     paymentReference?: string;
   };
 }
-interface PaymentDetailsCardProps {
-  content: Mock;
-}
 const PaymentDetails: React.FunctionComponent<PaymentDetailsCardProps> = ({
-  content: { mock },
+  mock,
 }) => (
   <CardWrapper>
     <PaymentItem>
