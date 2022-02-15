@@ -6,7 +6,7 @@ import Section from '@/components/Layout';
 import PaymentDetails from '@/components/PaymentDetails';
 import QrCodeCard from '@/components/QrCodeCard';
 import BankSelect from '@/components/BankSelect';
-import { Strong } from '@/components/Typography';
+import { SmallP, Strong } from '@/components/Typography';
 import Card from '../../components/Card';
 import Header from '../../containers/Header';
 
@@ -33,6 +33,16 @@ const Buttons = styled.div`
 
 const CancelButton = styled.div`
   margin-right: var(--space-2);
+`;
+
+const AgeementText = styled(SmallP)`
+  text-align: center;
+  margin-top: var(--space-2);
+`;
+
+const Link = styled.a`
+  text-decoration: none;
+  color: #38b6ff;
 `;
 
 const TopUpStep2Page: React.FunctionComponent = () => {
@@ -82,6 +92,25 @@ const TopUpStep2Page: React.FunctionComponent = () => {
       <Card title={mock.respnsiveTitle} isAccordion>
         <BankSelect activeBank={activeBank} setActiveBank={setActiveBank} />
       </Card>
+      {activeBank && (
+        <AgeementText>
+          By continuing to your selected bank, you accept our {` `}
+          <Link
+            target="_blank"
+            href="https://www.fena.co/terms-and-conditions/"
+          >
+            terms
+          </Link>
+          {` `}
+          and
+          {` `}
+          <Link target="_blank" href="https://www.fena.co/privacy-policy/">
+            privacy policy
+          </Link>
+          .
+        </AgeementText>
+      )}
+
       <Buttons>
         <CancelButton>
           <SecondaryButton>Cancel</SecondaryButton>

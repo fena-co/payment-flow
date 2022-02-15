@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LabelLoweCase, P, SmallP } from './Typography';
+import { LabelLoweCase, SmallP } from './Typography';
 import starling from '../assets/icons/starling.svg';
 import nationwide from '../assets/icons/nationwide.svg';
 import santander from '../assets/icons/santander.svg';
@@ -57,12 +57,6 @@ const Banks = styled.div`
   gap: 0.5rem;
 `;
 
-const AgeementText = styled(P)`
-  display: ${(props) => (props.hidden ? `block` : `none`)};
-  text-align: center;
-  margin-top: var(--space-2);
-`;
-
 const Banner = styled.div`
   background-color: #19385e;
   border-radius: 10px;
@@ -115,52 +109,46 @@ const BankSelect: React.FunctionComponent<BankSelectProps> = ({
   }
 
   return (
-    <>
-      <CardWrapper>
-        {activeBank && (
-          <Banner>
-            <BannerText>
-              We are redirecting you to your bank. You&#39;ll be sent back here
-              after you confirm your deposit
-            </BannerText>
-          </Banner>
+    <CardWrapper>
+      {activeBank && (
+        <Banner>
+          <BannerText>
+            We are redirecting you to your bank. You&#39;ll be sent back here
+            after you confirm your deposit
+          </BannerText>
+        </Banner>
+      )}
+      {!activeBank &&
+        (responsiveElement ? (
+          <CardLabel>
+            We&#39;ll automatically send you to your bank to approve the fast
+            and secure payment
+          </CardLabel>
+        ) : (
+          <CardLabel>Pay with online banking</CardLabel>
+        ))}
+
+      <Banks>
+        {!activeBank && (
+          <InputSection>
+            <Search type="text" placeholder="Search all banks" />
+            <InputIcon src={searchIcon} alt="input icon" />
+          </InputSection>
         )}
-        {!activeBank &&
-          (responsiveElement ? (
-            <CardLabel>
-              We&#39;ll automatically send you to your bank to approve the fast
-              and secure payment
-            </CardLabel>
-          ) : (
-            <CardLabel>Pay with online banking</CardLabel>
-          ))}
 
-        <Banks>
-          {!activeBank && (
-            <InputSection>
-              <Search type="text" placeholder="Search all banks" />
-              <InputIcon src={searchIcon} alt="input icon" />
-            </InputSection>
-          )}
-
-          {!activeBank ? (
-            banks.map((bank) => (
-              <BankListItem
-                key={bank.label}
-                onClick={() => handleBankClick(bank.label)}
-                {...bank}
-              />
-            ))
-          ) : (
-            <SingleBank onClick={() => changeButtonHandler()} {...activeBank} />
-          )}
-        </Banks>
-      </CardWrapper>
-      <AgeementText>
-        By continuing to your selected bank, you accept our terms and privacy
-        policy.
-      </AgeementText>
-    </>
+        {!activeBank ? (
+          banks.map((bank) => (
+            <BankListItem
+              key={bank.label}
+              onClick={() => handleBankClick(bank.label)}
+              {...bank}
+            />
+          ))
+        ) : (
+          <SingleBank onClick={() => changeButtonHandler()} {...activeBank} />
+        )}
+      </Banks>
+    </CardWrapper>
   );
 };
 
