@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Strong } from './Typography';
+
+const responsiveCSS = css`
+  @media (max-width: 900px) {
+    display: none;
+  }
+`;
 
 const CardWrapper = styled.section`
   background-color: #fff;
@@ -8,11 +14,6 @@ const CardWrapper = styled.section`
   padding: var(--space-3);
   margin-bottom: var(--space-2);
   box-shadow: 0px 2px 15px rgba(108, 108, 138, 0.15);
-  /* @media (max-width: 900px) {
-    flex-wrap: wrap;
-    background-color: #fff;
-    box-shadow: 0px 5px 20px rgba(129, 129, 165, 0.15);
-  } */
 `;
 
 const CardHeader = styled.header`
@@ -28,6 +29,7 @@ const CardTitleWrapper = styled.div`
 `;
 
 const AccordionButton = styled.button`
+  ${responsiveCSS}
   transform: ${(props) =>
     props[`aria-expanded`] ? `rotate(270deg)` : `rotateZ(90deg)`};
   width: 30px;
@@ -54,7 +56,8 @@ const Card: React.FunctionComponent<CardProps> = ({
   isAccordion,
   children,
 }) => {
-  const [isExpanded, setExpanded] = useState(false);
+  const [isExpanded, setExpanded] = useState(window.innerWidth < 900);
+
   const handleTriggerClick = () => {
     setExpanded(!isExpanded);
   };

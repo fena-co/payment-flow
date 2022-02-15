@@ -7,19 +7,13 @@ const BankButtonLabel = styled.label`
   padding: var(--space-2);
   display: flex;
   align-items: center;
-  /* min-width: 10rem; */
   background-color: #f4f7f9;
   cursor: pointer;
-  /* margin-right: 0.3rem;
-  margin-bottom: 0.5rem; */
-  /* flex-basis: ${(props) => (props.hidden ? `100%` : `10%`)}; */
   flex-basis: 25%;
   flex-grow: 1;
-  /* flex-shrink: 0; */
-  /* display: ${(props) => (props.id && props.hidden ? `none` : `initial`)}; */
-  /* &:nth-child(4n) {
-    margin-right: 0;
-  } */
+  @media (max-width: 900px) {
+    flex-basis: 100%;
+  }
 `;
 
 const BankIcon = styled.img`

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { LabelLoweCase, P } from './Typography';
+import { LabelLoweCase, P, SmallP } from './Typography';
 import starling from '../assets/icons/starling.svg';
 import nationwide from '../assets/icons/nationwide.svg';
 import santander from '../assets/icons/santander.svg';
@@ -13,19 +13,34 @@ import natwest from '../assets/icons/natwest.svg';
 import tsb from '../assets/icons/tsb.svg';
 import halifax from '../assets/icons/halifax.svg';
 import hsbc from '../assets/icons/hsbc.svg';
+import searchIcon from '../assets/icons/searchIcon.svg';
 import BankList from './BankList';
 import SingleBank from './SingleBank';
 
 const CardWrapper = styled.section``;
 
 const CardLabel = styled(LabelLoweCase)`
-  display: ${(props) => (props.hidden ? `none` : `block`)};
+  margin-bottom: var(--space-2);
+`;
+
+const InputSection = styled.div`
+  position: relative;
+  display: flex;
+  flex-basis: 100%;
+
+  margin-bottom: var(--space-1);
+`;
+
+const InputIcon = styled.img`
+  position: absolute;
+  left: 0;
+  top: 3px;
+  padding: 9px 8px;
 `;
 
 const Search = styled.input`
-  display: ${(props) => (props.hidden ? `none` : `initial`)};
   flex-basis: 100%;
-  padding: var(--space-2);
+  padding: var(--space-2) 3rem;
   background-color: #f4f7f9;
   border: 1px solid #dbe3eb;
   box-shadow: 0px 9px 20px rgba(129, 129, 165, 0.05);
@@ -33,7 +48,6 @@ const Search = styled.input`
   font-family: inherit;
   font-size: 16px;
   color: var(--light-text);
-  margin-bottom: var(--space-1);
 `;
 
 const Banks = styled.div`
@@ -49,6 +63,16 @@ const AgeementText = styled(P)`
   margin-top: var(--space-2);
 `;
 
+const Banner = styled.div`
+  background-color: #19385e;
+  border-radius: 10px;
+  padding: var(--space-2);
+  margin-bottom: var(--space-2);
+`;
+
+const BannerText = styled(SmallP)`
+  color: white;
+`;
 const BankSelect: React.FunctionComponent = () => {
   const banks = [
     { logo: starling, label: `Starling` },
@@ -64,7 +88,7 @@ const BankSelect: React.FunctionComponent = () => {
     { logo: halifax, label: `Halifax` },
     { logo: hsbc, label: `HSBC` },
   ];
-  // const [bankItems, setBankItems] = useState([...banks]);
+
   const [activeBank, setActiveBank] =
     useState<{ label: string; logo: string }>();
 
@@ -76,12 +100,43 @@ const BankSelect: React.FunctionComponent = () => {
     setActiveBank(undefined);
   };
 
+  let responsiveElement;
+
+  if (window.innerWidth < 900) {
+    responsiveElement = true;
+  } else {
+    responsiveElement = false;
+  }
+
   return (
     <>
       <CardWrapper>
-        <CardLabel>Pay with online banking</CardLabel>
+        {activeBank && (
+          <Banner>
+            <BannerText>
+              We are redirecting you to your bank. You&#39;ll be sent back here
+              after you confirm your deposit
+            </BannerText>
+          </Banner>
+        )}
+        {!activeBank &&
+          (responsiveElement ? (
+            <CardLabel>
+              We&#39;ll automatically send you to your bank to approve the fast
+              and secure payment
+            </CardLabel>
+          ) : (
+            <CardLabel>Pay with online banking</CardLabel>
+          ))}
+
         <Banks>
-          <Search type="text" placeholder="Search all banks" />
+          {!activeBank && (
+            <InputSection>
+              <Search type="text" placeholder="Search all banks" />
+              <InputIcon src={searchIcon} alt="input icon" />
+            </InputSection>
+          )}
+
           {!activeBank ? (
             banks.map((bank) => (
               <BankList onClick={() => handleBankClick(bank.label)} {...bank} />
