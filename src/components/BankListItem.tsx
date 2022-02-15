@@ -33,7 +33,7 @@ interface BankListProps {
   logo: string;
   onClick: () => void;
 }
-const BankList: React.FunctionComponent<BankListProps> = ({
+const BankListItem: React.FunctionComponent<BankListProps> = ({
   label,
   logo,
   onClick,
@@ -45,4 +45,4 @@ const BankList: React.FunctionComponent<BankListProps> = ({
   </BankButtonLabel>
 );
 
-export default BankList;
+export default BankListItem;

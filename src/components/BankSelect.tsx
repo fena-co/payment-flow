@@ -14,8 +14,8 @@ import tsb from '../assets/icons/tsb.svg';
 import halifax from '../assets/icons/halifax.svg';
 import hsbc from '../assets/icons/hsbc.svg';
 import searchIcon from '../assets/icons/searchIcon.svg';
-import BankList from './BankList';
 import SingleBank from './SingleBank';
+import BankListItem from './BankListItem';
 
 const CardWrapper = styled.section``;
 
@@ -139,7 +139,10 @@ const BankSelect: React.FunctionComponent = () => {
 
           {!activeBank ? (
             banks.map((bank) => (
-              <BankList onClick={() => handleBankClick(bank.label)} {...bank} />
+              <BankListItem
+                onClick={() => handleBankClick(bank.label)}
+                {...bank}
+              />
             ))
           ) : (
             <SingleBank onClick={() => changeButtonHandler()} {...activeBank} />
