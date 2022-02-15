@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { LabelLoweCase, P, SmallP } from './Typography';
 import starling from '../assets/icons/starling.svg';
@@ -73,7 +73,16 @@ const Banner = styled.div`
 const BannerText = styled(SmallP)`
   color: white;
 `;
-const BankSelect: React.FunctionComponent = () => {
+
+interface BankSelectProps {
+  activeBank: { label: string; logo: string };
+  setActiveBank: (value) => void;
+}
+
+const BankSelect: React.FunctionComponent<BankSelectProps> = ({
+  activeBank,
+  setActiveBank,
+}) => {
   const banks = [
     { logo: starling, label: `Starling` },
     { logo: nationwide, label: `Nationwide` },
@@ -88,9 +97,6 @@ const BankSelect: React.FunctionComponent = () => {
     { logo: halifax, label: `Halifax` },
     { logo: hsbc, label: `HSBC` },
   ];
-
-  const [activeBank, setActiveBank] =
-    useState<{ label: string; logo: string }>();
 
   const handleBankClick = (label) => {
     setActiveBank(banks.find((item) => item.label === label));

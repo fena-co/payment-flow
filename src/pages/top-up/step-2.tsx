@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import SecondaryButton from '@/components/SecondaryButton';
 import Button from '@/components/Button';
@@ -45,6 +45,9 @@ const TopUpStep2Page: React.FunctionComponent = () => {
     paymentMethod: `Instant Bank Transfer`,
   };
 
+  const [activeBank, setActiveBank] =
+    useState<{ label: string; logo: string }>();
+
   return (
     <Section>
       <Header title="Bank Select" backUrl="/top-up/step-1" />
@@ -77,13 +80,13 @@ const TopUpStep2Page: React.FunctionComponent = () => {
       </ResponsiveCard>
 
       <Card title={mock.respnsiveTitle} isAccordion>
-        <BankSelect />
+        <BankSelect activeBank={activeBank} setActiveBank={setActiveBank} />
       </Card>
       <Buttons>
         <CancelButton>
           <SecondaryButton>Cancel</SecondaryButton>
         </CancelButton>
-        <Button>Continue</Button>
+        <Button disabled={!activeBank}>Continue</Button>
       </Buttons>
     </Section>
   );
