@@ -1,7 +1,7 @@
 module.exports = {
   // Since `gatsby-plugin-typescript` is automatically included in Gatsby you
   // don't need to define it here (just if you need to change the options)
-  pathPrefix: `/payment-flow`,
+  pathPrefix: `/payment-flow/top-up/step-1/`,
   plugins: [
     {
       resolve: `gatsby-plugin-google-fonts`,
