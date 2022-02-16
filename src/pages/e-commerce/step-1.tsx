@@ -41,7 +41,7 @@ const Link = styled.a`
   color: #38b6ff;
 `;
 
-const TopUpStep2Page: React.FunctionComponent = () => {
+const EcommercePage: React.FunctionComponent = () => {
   const mock = {
     respnsiveTitle:
       window.innerWidth < 900 ? `Select your bank` : `Can't scan the QR code?`,
@@ -56,7 +56,7 @@ const TopUpStep2Page: React.FunctionComponent = () => {
 
   return (
     <Layout>
-      <Header title="Bank Select" backUrl="/top-up/step-1" />
+      <Header title="Bank Select" />
       <Card
         title="Summary"
         collapsedTitle={
@@ -117,4 +117,4 @@ const TopUpStep2Page: React.FunctionComponent = () => {
   );
 };
 
-export default TopUpStep2Page;
+export default EcommercePage;

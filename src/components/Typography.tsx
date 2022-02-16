@@ -19,11 +19,16 @@ export const P = styled.p`
 `;
 
 export const Label = styled.label`
-  color: var(--dark-text);
+  color: var(--light-text);
   font-size: 80%;
   margin-bottom: var(--space-1);
   display: block;
   text-transform: uppercase;
+`;
+
+export const LabelLowerCase = styled(Label)`
+  text-transform: none;
+  font-size: 100%;
 `;
 
 export const SmallP = styled(P)`
@@ -32,6 +37,7 @@ export const SmallP = styled(P)`
 
 export const Strong = styled(P)`
   font-weight: bold;
+  display: inline;
 `;
 
 export const Subtitle = styled(P)`
