@@ -6,19 +6,20 @@ const CardWrapper = styled.section`
   background-color: #fff;
   border-radius: 10px;
   padding: var(--space-3);
-  /* @media (max-width: 900px) {
-    flex-wrap: wrap;
-    background-color: #fff;
-    box-shadow: 0px 5px 20px rgba(129, 129, 165, 0.15);
-  } */
+  margin-bottom: var(--space-2);
+  box-shadow: 0px 2px 15px rgba(108, 108, 138, 0.15);
 `;
 
 const CardHeader = styled.header`
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: ${(props) =>
     props[`aria-expanded`] ? `var(--space-3)` : `0`};
+`;
+
+const CardTitleWrapper = styled.div`
+  flex: 1 0 auto;
 `;
 
 const AccordionButton = styled.button`
@@ -31,19 +32,28 @@ const AccordionButton = styled.button`
   background-color: white;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
   border: none;
+  @media (max-width: 900px) {
+    display: none;
+  }
 `;
 
+const CardTitle: React.FunctionComponent<any> = ({ children }) =>
+  typeof children === `string` ? <Strong>{children}</Strong> : children;
+
 interface CardProps {
-  title: string;
+  title: string | JSX.Element;
+  collapsedTitle?: string | JSX.Element;
   isAccordion?: boolean;
 }
 
 const Card: React.FunctionComponent<CardProps> = ({
   title,
+  collapsedTitle,
   isAccordion,
   children,
 }) => {
-  const [isExpanded, setExpanded] = useState(false);
+  const [isExpanded, setExpanded] = useState(window.innerWidth < 900);
+
   const handleTriggerClick = () => {
     setExpanded(!isExpanded);
   };
@@ -51,7 +61,14 @@ const Card: React.FunctionComponent<CardProps> = ({
   return (
     <CardWrapper>
       <CardHeader aria-expanded={!isAccordion || isExpanded}>
-        <Strong>{title}</Strong>
+        <CardTitleWrapper>
+          {!isExpanded ? (
+            <CardTitle>{collapsedTitle || title}</CardTitle>
+          ) : (
+            <CardTitle>{title}</CardTitle>
+          )}
+        </CardTitleWrapper>
+
         {isAccordion && (
           <AccordionButton
             type="button"

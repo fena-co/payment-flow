@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-
-import Section from '@/components/Section';
+import Layout from '@/components/Layout';
 import Card from '../../components/Card';
 import Header from '../../containers/Header';
 import { Label, P, Subtitle } from '../../components/Typography';
@@ -21,9 +20,6 @@ const GraySection = styled.div`
   background-color: #f4f7f9;
   border-radius: 10px;
   padding: var(--space-2);
-  @media (max-width: 900px) {
-    flex-wrap: wrap;
-  }
 `;
 
 const GrayRowSection = styled(GraySection)`
@@ -53,7 +49,10 @@ const Input = styled.input`
   font-size: 26px;
   font-weight: bold;
   color: black;
-  width: 100%;
+
+  @media (max-width: 900px) {
+    width: 100%;
+  }
 `;
 
 const InputLine = styled.div`
@@ -102,12 +101,12 @@ const TopUpStep1Page: React.FunctionComponent = () => {
     formState: { isDirty, isValid },
   } = useForm<AmountFormValues>({ mode: `onChange` });
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = () => {
+    // console.log(data);
   };
 
   return (
-    <Section>
+    <Layout>
       <Header title="Top Up" />
       <form onSubmit={handleSubmit(onSubmit)}>
         <Card title="Summary">
@@ -148,7 +147,7 @@ const TopUpStep1Page: React.FunctionComponent = () => {
           </Button>
         </Buttons>
       </form>
-    </Section>
+    </Layout>
   );
 };
 
