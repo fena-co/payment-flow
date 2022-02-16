@@ -79,7 +79,7 @@ const QrCodesPage: React.FunctionComponent = () => {
         }
         isAccordion
       >
-        <PaymentDetails {...{ mock }} />
+        <PaymentDetails {...mock} />
       </Card>
 
       <Card title="Comment" isAccordion>

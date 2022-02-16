@@ -76,7 +76,7 @@ const PaymentSuccessPage: React.FunctionComponent = () => {
           <SmallP className="accent-text-gray">{mock.date}</SmallP>
         </Top>
         <Bottom>
-          <PaymentDetails {...{ mock }} />
+          <PaymentDetails {...mock} />
         </Bottom>
         <ButtonWrapper>
           <Button>Done</Button>

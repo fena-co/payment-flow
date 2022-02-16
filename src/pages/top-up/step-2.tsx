@@ -76,7 +76,7 @@ const TopUpStep2Page: React.FunctionComponent = () => {
         }
         isAccordion
       >
-        <PaymentDetails {...{ mock }} />
+        <PaymentDetails {...mock} />
       </Card>
 
       <ResponsiveCard>
