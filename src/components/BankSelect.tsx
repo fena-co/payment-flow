@@ -112,7 +112,7 @@ const BankSelect: React.FunctionComponent<BankSelectProps> = ({
       )}
       {!activeBank && (
         <>
-          <CardLabel>Pay with online banking</CardLabel>
+          <CardLabel>Pay with online banking. </CardLabel>
           <CardLabel>
             We&#39;ll automatically send you to your bank to approve the fast
             and secure payment
