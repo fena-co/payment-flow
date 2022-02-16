@@ -52,7 +52,9 @@ const Card: React.FunctionComponent<CardProps> = ({
   isAccordion,
   children,
 }) => {
-  const [isExpanded, setExpanded] = useState(window.innerWidth < 900);
+  const [isExpanded, setExpanded] = useState(
+    typeof window !== `undefined` && window.innerWidth < 900,
+  );
 
   const handleTriggerClick = () => {
     setExpanded(!isExpanded);

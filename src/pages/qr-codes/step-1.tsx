@@ -44,7 +44,9 @@ const Link = styled.a`
 const QrCodesPage: React.FunctionComponent = () => {
   const mock = {
     respnsiveTitle:
-      window.innerWidth < 900 ? `Select your bank` : `Can't scan the QR code?`,
+      typeof window !== `undefined` && window.innerWidth < 900
+        ? `Select your bank`
+        : `Can't scan the QR code?`,
     date: `25 Nov 2021, 13:38pm`,
     amount: `50`,
     depositTo: `Coinbase`,

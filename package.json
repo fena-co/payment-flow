@@ -1,6 +1,5 @@
 {
   "name": "payment-flow",
-  "homepage": "https://fena-co.github.io",
   "description": "A TypeScript starter for Gatsby that includes all you need to build amazing projects",
   "version": "1.0.0",
   "private": true,
@@ -10,6 +9,7 @@
     "typescript"
   ],
   "scripts": {
+    "deploy": "gatsby build --prefix-paths && gh-pages -d public",
     "start": "gatsby develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
@@ -21,9 +21,7 @@
     "test": "jest",
     "commit": "cz",
     "lint-staged": "lint-staged",
-    "commitlint": "commitlint",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "commitlint": "commitlint"
   },
   "lint-staged": {
     "*.{ts,js,jsx,tsx}": [
