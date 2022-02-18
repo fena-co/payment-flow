@@ -7,6 +7,7 @@ const Section = styled.section`
   padding: 5rem calc((100vw - 800px) / 2);
   overflow-y: scroll;
   background-color: #f4f7f9;
+  position: relative;
   @media (max-width: 900px) {
     height: calc(100vh - 3rem * 2);
     padding: 3rem var(--space-2);
@@ -23,6 +24,10 @@ const Banner = styled.div`
   );
   display: flex;
   justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 `;
 
 const BannerText = styled(P)`
@@ -36,7 +41,7 @@ const Link = styled.a`
 `;
 
 const Layout: React.FunctionComponent = ({ children }) => (
-  <>
+  <Section>
     <Banner>
       <BannerText>
         ID verification, Connecting your bank account and Email confirmation are
@@ -44,8 +49,8 @@ const Layout: React.FunctionComponent = ({ children }) => (
         <Link href="/">Complete account set-up</Link>
       </BannerText>
     </Banner>
-    <Section>{children}</Section>
-  </>
+    {children}
+  </Section>
 );
 
 export default Layout;
