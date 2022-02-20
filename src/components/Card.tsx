@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Strong } from './Typography';
 import arrow from '../assets/icons/downArrow.svg';
@@ -54,17 +54,22 @@ interface CardProps {
   title: string | JSX.Element;
   collapsedTitle?: string | JSX.Element;
   isAccordion?: boolean;
+  defaultExpanded?: boolean;
 }
 
 const Card: React.FunctionComponent<CardProps> = ({
   title,
   collapsedTitle,
   isAccordion,
+  defaultExpanded,
   children,
 }) => {
-  const [isExpanded, setExpanded] = useState(
-    typeof window !== `undefined` && window.innerWidth < 900,
-  );
+  const [isExpanded, setExpanded] = useState(defaultExpanded || false);
+  useEffect(() => {
+    if (!defaultExpanded) {
+      setExpanded(typeof window !== `undefined` && window.innerWidth < 900);
+    }
+  }, []);
 
   const handleTriggerClick = () => {
     setExpanded(!isExpanded);

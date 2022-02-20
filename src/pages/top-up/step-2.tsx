@@ -86,7 +86,11 @@ const TopUpStep2Page: React.FunctionComponent = () => {
       </Card>
 
       <ResponsiveCard>
-        <Card title="Scan the QR code with your phone " isAccordion>
+        <Card
+          title="Scan the QR code with your phone "
+          isAccordion
+          defaultExpanded
+        >
           <QrCodeCard />
         </Card>
       </ResponsiveCard>
