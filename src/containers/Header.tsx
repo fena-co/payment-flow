@@ -1,6 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
+import arrow from '../assets/icons/arrow.svg';
 
 import { H2 } from '../components/Typography';
 
@@ -24,6 +25,9 @@ const Back = styled(Link)`
   margin-right: var(--space-1);
 `;
 
+const BackIcon = styled.img`
+  margin-right: 0.1rem;
+`;
 interface HeaderProps {
   title: string;
   backUrl?: string;
@@ -31,7 +35,11 @@ interface HeaderProps {
 
 const Header: React.FunctionComponent<HeaderProps> = ({ backUrl, title }) => (
   <Head>
-    {backUrl && <Back to={backUrl}> &lt; </Back>}
+    {backUrl && (
+      <Back to={backUrl}>
+        <BackIcon src={arrow} alt="back" />
+      </Back>
+    )}
     <H2>{title}</H2>
   </Head>
 );

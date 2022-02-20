@@ -10,6 +10,10 @@ import Layout from '@/components/Layout';
 import Card from '../../components/Card';
 import Header from '../../containers/Header';
 
+const CollapsedCardTitle = styled(Strong)`
+  text-transform: uppercase;
+`;
+
 const ResponsiveCard = styled.div`
   @media (max-width: 900px) {
     display: none;
@@ -48,8 +52,8 @@ const QrCodesPage: React.FunctionComponent = () => {
         ? `Select your bank`
         : `Can't scan the QR code?`,
     date: `25 Nov 2021, 13:38pm`,
-    amount: `50`,
-    depositTo: `Coinbase`,
+    amount: `50.00`,
+    payTo: `Coinbase`,
     paymentMethod: `Instant Bank Transfer`,
     accountNumber: `10987654321`,
     sortCode: `20-00-00`,
@@ -63,10 +67,11 @@ const QrCodesPage: React.FunctionComponent = () => {
     <Layout>
       <Header title="Bank Select" />
       <Card
+        defaultExpanded
         title="Summary"
         collapsedTitle={
           <>
-            <Strong>Summary: </Strong>
+            <CollapsedCardTitle>Summary: </CollapsedCardTitle>
             Pay
             {` `}
             <span className="accent-text-black-bold">
@@ -76,7 +81,7 @@ const QrCodesPage: React.FunctionComponent = () => {
             {` `}
             to
             {` `}
-            {mock.depositTo}
+            {mock.payTo}
           </>
         }
         isAccordion
@@ -84,7 +89,7 @@ const QrCodesPage: React.FunctionComponent = () => {
         <PaymentDetails {...mock} />
       </Card>
 
-      <Card title="Comment" isAccordion>
+      <Card title="Comment" defaultExpanded isAccordion>
         <P>
           This is a custom message for the payer if a message is inputted from
           the app.
@@ -92,12 +97,16 @@ const QrCodesPage: React.FunctionComponent = () => {
       </Card>
 
       <ResponsiveCard>
-        <Card title="Scan the QR code with your phone " isAccordion>
+        <Card
+          title="Scan the QR code with your phone "
+          isAccordion
+          defaultExpanded
+        >
           <QrCodeCard />
         </Card>
       </ResponsiveCard>
 
-      <Card title={mock.respnsiveTitle} isAccordion>
+      <Card title={mock.respnsiveTitle} isAccordion defaultExpanded>
         <BankSelect activeBank={activeBank} setActiveBank={setActiveBank} />
       </Card>
       {activeBank && (

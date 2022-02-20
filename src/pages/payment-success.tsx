@@ -61,7 +61,7 @@ const ButtonWrapper = styled.div`
 const PaymentSuccessPage: React.FunctionComponent = () => {
   const mock = {
     date: `25 Nov 2021, 13:38pm`,
-    amount: `50`,
+    amount: `50.00`,
     depositTo: `Coinbase`,
     paymentMethod: `Instant Bank Transfer`,
   };

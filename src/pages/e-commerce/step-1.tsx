@@ -10,6 +10,10 @@ import Layout from '@/components/Layout';
 import Card from '../../components/Card';
 import Header from '../../containers/Header';
 
+const CollapsedCardTitle = styled(Strong)`
+  text-transform: uppercase;
+`;
+
 const ResponsiveCard = styled.div`
   @media (max-width: 900px) {
     display: none;
@@ -48,7 +52,7 @@ const EcommercePage: React.FunctionComponent = () => {
         ? `Select your bank`
         : `Can't scan the QR code?`,
     date: `25 Nov 2021, 13:38pm`,
-    amount: `50`,
+    amount: `50.00`,
     depositTo: `Coinbase`,
     paymentMethod: `Instant Bank Transfer`,
   };
@@ -60,10 +64,11 @@ const EcommercePage: React.FunctionComponent = () => {
     <Layout>
       <Header title="Bank Select" />
       <Card
+        defaultExpanded
         title="Summary"
         collapsedTitle={
           <>
-            <Strong>Summary: </Strong>
+            <CollapsedCardTitle>Summary: </CollapsedCardTitle>
             Pay
             {` `}
             <span className="accent-text-black-bold">
@@ -82,12 +87,16 @@ const EcommercePage: React.FunctionComponent = () => {
       </Card>
 
       <ResponsiveCard>
-        <Card title="Scan the QR code with your phone " isAccordion>
+        <Card
+          defaultExpanded
+          title="Scan the QR code with your phone "
+          isAccordion
+        >
           <QrCodeCard />
         </Card>
       </ResponsiveCard>
 
-      <Card title={mock.respnsiveTitle} isAccordion>
+      <Card defaultExpanded title={mock.respnsiveTitle} isAccordion>
         <BankSelect activeBank={activeBank} setActiveBank={setActiveBank} />
       </Card>
       {activeBank && (

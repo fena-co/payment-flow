@@ -34,20 +34,10 @@ const BannerText = styled(P)`
   color: white;
 `;
 
-const Link = styled.a`
-  color: #00ffb2;
-  font-weight: bold;
-  text-decoration: none;
-`;
-
 const Layout: React.FunctionComponent = ({ children }) => (
   <Section>
     <Banner>
-      <BannerText>
-        ID verification, Connecting your bank account and Email confirmation are
-        still required before you can start taking payments.{` `}
-        <Link href="/">Complete account set-up</Link>
-      </BannerText>
+      <BannerText>You are currently in sandbox mode</BannerText>
     </Banner>
     {children}
   </Section>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Strong } from './Typography';
+import arrow from '../assets/icons/downArrow.svg';
 
 const CardWrapper = styled.section`
   background-color: #fff;
@@ -22,9 +23,12 @@ const CardTitleWrapper = styled.div`
   flex: 1 0 auto;
 `;
 
+const CardTitleText = styled(Strong)`
+  text-transform: uppercase;
+`;
 const AccordionButton = styled.button`
   transform: ${(props) =>
-    props[`aria-expanded`] ? `rotate(270deg)` : `rotateZ(90deg)`};
+    props[`aria-expanded`] ? `rotate(180deg)` : `rotateZ(0deg)`};
   width: 30px;
   height: 30px;
   font-weight: bold;
@@ -37,8 +41,14 @@ const AccordionButton = styled.button`
   }
 `;
 
+const BackIcon = styled.img``;
+
 const CardTitle: React.FunctionComponent<any> = ({ children }) =>
-  typeof children === `string` ? <Strong>{children}</Strong> : children;
+  typeof children === `string` ? (
+    <CardTitleText>{children}</CardTitleText>
+  ) : (
+    children
+  );
 
 interface CardProps {
   title: string | JSX.Element;
@@ -82,7 +92,7 @@ const Card: React.FunctionComponent<CardProps> = ({
             aria-expanded={isExpanded}
             onClick={handleTriggerClick}
           >
-            &gt;
+            <BackIcon src={arrow} alt="back" />
           </AccordionButton>
         )}
       </CardHeader>
