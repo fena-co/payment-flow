@@ -64,6 +64,7 @@ const EcommercePage: React.FunctionComponent = () => {
     <Layout>
       <Header title="Bank Select" />
       <Card
+        defaultExpanded
         title="Summary"
         collapsedTitle={
           <>
@@ -86,12 +87,16 @@ const EcommercePage: React.FunctionComponent = () => {
       </Card>
 
       <ResponsiveCard>
-        <Card title="Scan the QR code with your phone " isAccordion>
+        <Card
+          defaultExpanded
+          title="Scan the QR code with your phone "
+          isAccordion
+        >
           <QrCodeCard />
         </Card>
       </ResponsiveCard>
 
-      <Card title={mock.respnsiveTitle} isAccordion>
+      <Card defaultExpanded title={mock.respnsiveTitle} isAccordion>
         <BankSelect activeBank={activeBank} setActiveBank={setActiveBank} />
       </Card>
       {activeBank && (

@@ -64,6 +64,7 @@ const TopUpStep2Page: React.FunctionComponent = () => {
     <Layout>
       <Header title="Bank Select" backUrl="/top-up/step-1" />
       <Card
+        defaultExpanded
         title="Summary"
         collapsedTitle={
           <>
@@ -95,7 +96,7 @@ const TopUpStep2Page: React.FunctionComponent = () => {
         </Card>
       </ResponsiveCard>
 
-      <Card title={mock.respnsiveTitle} isAccordion>
+      <Card title={mock.respnsiveTitle} isAccordion defaultExpanded>
         <BankSelect activeBank={activeBank} setActiveBank={setActiveBank} />
       </Card>
       {activeBank && (

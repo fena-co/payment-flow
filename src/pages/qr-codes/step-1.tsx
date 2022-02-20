@@ -67,6 +67,7 @@ const QrCodesPage: React.FunctionComponent = () => {
     <Layout>
       <Header title="Bank Select" />
       <Card
+        defaultExpanded
         title="Summary"
         collapsedTitle={
           <>
@@ -88,7 +89,7 @@ const QrCodesPage: React.FunctionComponent = () => {
         <PaymentDetails {...mock} />
       </Card>
 
-      <Card title="Comment" isAccordion>
+      <Card title="Comment" defaultExpanded isAccordion>
         <P>
           This is a custom message for the payer if a message is inputted from
           the app.
@@ -96,12 +97,16 @@ const QrCodesPage: React.FunctionComponent = () => {
       </Card>
 
       <ResponsiveCard>
-        <Card title="Scan the QR code with your phone " isAccordion>
+        <Card
+          title="Scan the QR code with your phone "
+          isAccordion
+          defaultExpanded
+        >
           <QrCodeCard />
         </Card>
       </ResponsiveCard>
 
-      <Card title={mock.respnsiveTitle} isAccordion>
+      <Card title={mock.respnsiveTitle} isAccordion defaultExpanded>
         <BankSelect activeBank={activeBank} setActiveBank={setActiveBank} />
       </Card>
       {activeBank && (
