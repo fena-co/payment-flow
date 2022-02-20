@@ -40,7 +40,7 @@ const InputIcon = styled.img`
 
 const Search = styled.input`
   flex-basis: 100%;
-  padding: var(--space-2) 3rem;
+  padding: var(--space-2) 0 var(--space-2) 3rem;
   background-color: #f4f7f9;
   border: 1px solid #dbe3eb;
   box-shadow: 0px 9px 20px rgba(129, 129, 165, 0.05);
@@ -100,6 +100,9 @@ const BankSelect: React.FunctionComponent<BankSelectProps> = ({
     setActiveBank(undefined);
   };
 
+  const responsiveElement =
+    typeof window !== `undefined` && window.innerWidth < 900;
+
   return (
     <CardWrapper>
       {activeBank && (
@@ -110,15 +113,15 @@ const BankSelect: React.FunctionComponent<BankSelectProps> = ({
           </BannerText>
         </Banner>
       )}
-      {!activeBank && (
-        <>
-          <CardLabel>Pay with online banking. </CardLabel>
+      {!activeBank &&
+        (responsiveElement ? (
           <CardLabel>
             We&#39;ll automatically send you to your bank to approve the fast
             and secure payment
           </CardLabel>
-        </>
-      )}
+        ) : (
+          <CardLabel>Pay with online banking. </CardLabel>
+        ))}
 
       <Banks>
         {!activeBank && (

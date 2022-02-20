@@ -16,7 +16,8 @@ const Span = styled.span`
 
 interface PaymentDetailsCardProps {
   amount: string;
-  depositTo: string;
+  depositTo?: string;
+  payTo?: string;
   paymentMethod: string;
   accountNumber?: string;
   sortCode?: string;
@@ -25,6 +26,7 @@ interface PaymentDetailsCardProps {
 const PaymentDetails: React.FunctionComponent<PaymentDetailsCardProps> = ({
   amount,
   depositTo,
+  payTo,
   paymentMethod,
   accountNumber,
   paymentReference,
@@ -38,17 +40,26 @@ const PaymentDetails: React.FunctionComponent<PaymentDetailsCardProps> = ({
         {amount}
       </Span>
     </PaymentItem>
-    <PaymentItem className="accent-text-gray">
-      <P className="accent-text-gray">Deposit to:</P>
-      <Span className="accent-text-black">{depositTo}</Span>
-    </PaymentItem>
+    {depositTo && (
+      <PaymentItem className="accent-text-gray">
+        <P className="accent-text-gray">Deposit to:</P>
+        <Span className="accent-text-black">{depositTo}</Span>
+      </PaymentItem>
+    )}
+    {payTo && (
+      <PaymentItem className="accent-text-gray">
+        <P className="accent-text-gray">Pay to:</P>
+        <Span className="accent-text-black">{payTo}</Span>
+      </PaymentItem>
+    )}
+
     <PaymentItem>
       <P className="accent-text-gray">Payment method:</P>
       <Span className="accent-text-black">{paymentMethod}</Span>
     </PaymentItem>
     {accountNumber && (
       <PaymentItem>
-        <P className="accent-text-gray">Payment method:</P>
+        <P className="accent-text-gray">Account number:</P>
         <Span className="accent-text-black">{accountNumber}</Span>
       </PaymentItem>
     )}

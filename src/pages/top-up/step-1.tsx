@@ -120,7 +120,13 @@ const TopUpStep1Page: React.FunctionComponent = () => {
                     placeholder="0"
                     min={0}
                     step={0.01}
-                    {...register(`amount`, { required: true, min: 0.01 })}
+                    {...register(`amount`, {
+                      required: true,
+                      min: 0.01,
+                      onBlur: (e) => {
+                        e.target.value = parseFloat(e.target.value).toFixed(2);
+                      },
+                    })}
                   />
                   <Currency>£</Currency>
                 </InputLine>

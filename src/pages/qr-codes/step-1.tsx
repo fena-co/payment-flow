@@ -10,6 +10,10 @@ import Layout from '@/components/Layout';
 import Card from '../../components/Card';
 import Header from '../../containers/Header';
 
+const CollapsedCardTitle = styled(Strong)`
+  text-transform: uppercase;
+`;
+
 const ResponsiveCard = styled.div`
   @media (max-width: 900px) {
     display: none;
@@ -48,8 +52,8 @@ const QrCodesPage: React.FunctionComponent = () => {
         ? `Select your bank`
         : `Can't scan the QR code?`,
     date: `25 Nov 2021, 13:38pm`,
-    amount: `50`,
-    depositTo: `Coinbase`,
+    amount: `50.00`,
+    payTo: `Coinbase`,
     paymentMethod: `Instant Bank Transfer`,
     accountNumber: `10987654321`,
     sortCode: `20-00-00`,
@@ -66,7 +70,7 @@ const QrCodesPage: React.FunctionComponent = () => {
         title="Summary"
         collapsedTitle={
           <>
-            <Strong>Summary: </Strong>
+            <CollapsedCardTitle>Summary: </CollapsedCardTitle>
             Pay
             {` `}
             <span className="accent-text-black-bold">
@@ -76,7 +80,7 @@ const QrCodesPage: React.FunctionComponent = () => {
             {` `}
             to
             {` `}
-            {mock.depositTo}
+            {mock.payTo}
           </>
         }
         isAccordion

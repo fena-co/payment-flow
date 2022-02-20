@@ -10,6 +10,10 @@ import Layout from '@/components/Layout';
 import Card from '../../components/Card';
 import Header from '../../containers/Header';
 
+const CollapsedCardTitle = styled(Strong)`
+  text-transform: uppercase;
+`;
+
 const ResponsiveCard = styled.div`
   @media (max-width: 900px) {
     display: none;
@@ -48,7 +52,7 @@ const TopUpStep2Page: React.FunctionComponent = () => {
         ? `Select your bank`
         : `Can't scan the QR code?`,
     date: `25 Nov 2021, 13:38pm`,
-    amount: `50`,
+    amount: `50.00`,
     depositTo: `Coinbase`,
     paymentMethod: `Instant Bank Transfer`,
   };
@@ -63,7 +67,7 @@ const TopUpStep2Page: React.FunctionComponent = () => {
         title="Summary"
         collapsedTitle={
           <>
-            <Strong>Summary: </Strong>
+            <CollapsedCardTitle>Summary: </CollapsedCardTitle>
             Pay
             {` `}
             <span className="accent-text-black-bold">
