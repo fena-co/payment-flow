@@ -21,6 +21,7 @@ export const P = styled.p`
 export const Label = styled.label`
   color: var(--light-text);
   font-size: 80%;
+  font-weight: 500;
   margin-bottom: var(--space-1);
   display: block;
   text-transform: uppercase;
@@ -28,6 +29,7 @@ export const Label = styled.label`
 
 export const LabelLowerCase = styled(Label)`
   text-transform: none;
+  font-weight: 400;
   font-size: 100%;
 `;
 
