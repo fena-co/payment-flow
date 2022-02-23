@@ -25,8 +25,9 @@ const GraySection = styled.div`
 const GrayRowSection = styled(GraySection)`
   flex-grow: 1;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 `;
 
 const Left = styled.div`
