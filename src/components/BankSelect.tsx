@@ -1,18 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Provider } from '@/pages/pay';
 import { LabelLowerCase, SmallP } from './Typography';
-import starling from '../assets/icons/starling.svg';
-import nationwide from '../assets/icons/nationwide.svg';
-import santander from '../assets/icons/santander.svg';
-import monzo from '../assets/icons/monzo.svg';
-import barklays from '../assets/icons/barklays.svg';
-import tescoBank from '../assets/icons/tescoBank.svg';
-import revoult from '../assets/icons/revoult.svg';
-import lloyds from '../assets/icons/lloyds.svg';
-import natwest from '../assets/icons/natwest.svg';
-import tsb from '../assets/icons/tsb.svg';
-import halifax from '../assets/icons/halifax.svg';
-import hsbc from '../assets/icons/hsbc.svg';
 import searchIcon from '../assets/icons/searchIcon.svg';
 import SingleBank from './SingleBank';
 import BankListItem from './BankListItem';
@@ -43,7 +32,7 @@ const Search = styled.input`
   padding: var(--space-2) 0 var(--space-2) 3rem;
   background-color: #f4f7f9;
   border: 1px solid #dbe3eb;
-  box-shadow: 0px 9px 20px rgba(129, 129, 165, 0.05);
+  box-shadow: 0 9px 20px rgba(129, 129, 165, 0.05);
   border-radius: 5px;
   font-family: inherit;
   font-size: 16px;
@@ -69,31 +58,18 @@ const BannerText = styled(SmallP)`
 `;
 
 interface BankSelectProps {
-  activeBank: { label: string; logo: string };
-  setActiveBank: (value) => void;
+  activeBank: Provider;
+  setActiveBank: (value: Provider) => void;
+  providerList: Array<Provider>;
 }
 
 const BankSelect: React.FunctionComponent<BankSelectProps> = ({
   activeBank,
   setActiveBank,
+  providerList,
 }) => {
-  const banks = [
-    { logo: starling, label: `Starling` },
-    { logo: nationwide, label: `Nationwide` },
-    { logo: santander, label: `Santander` },
-    { logo: monzo, label: `Monzo` },
-    { logo: barklays, label: `Barklays` },
-    { logo: tescoBank, label: `Tesco bank` },
-    { logo: revoult, label: `Revoult` },
-    { logo: lloyds, label: `Lloyds` },
-    { logo: natwest, label: `Natwest` },
-    { logo: tsb, label: `TSB` },
-    { logo: halifax, label: `Halifax` },
-    { logo: hsbc, label: `HSBC` },
-  ];
-
-  const handleBankClick = (label) => {
-    setActiveBank(banks.find((item) => item.label === label));
+  const handleBankClick = (name: string) => () => {
+    setActiveBank(providerList.find((item) => item.name === name));
   };
 
   const changeButtonHandler = () => {
@@ -132,10 +108,10 @@ const BankSelect: React.FunctionComponent<BankSelectProps> = ({
         )}
 
         {!activeBank ? (
-          banks.map((bank) => (
+          providerList.map((bank) => (
             <BankListItem
-              key={bank.label}
-              onClick={() => handleBankClick(bank.label)}
+              key={bank.externalId}
+              onClick={handleBankClick(bank.name)}
               {...bank}
             />
           ))

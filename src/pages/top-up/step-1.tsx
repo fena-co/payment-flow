@@ -1,13 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import Layout from '@/components/Layout';
-import Card from '../../components/Card';
+import {
+  Layout,
+  Card,
+  Label,
+  P,
+  Subtitle,
+  OvalButton,
+  SecondaryButton,
+  Button,
+} from '@/components';
 import Header from '../../containers/Header';
-import { Label, P, Subtitle } from '../../components/Typography';
-import OvalButton from '../../components/OvalButton';
-import SecondaryButton from '../../components/SecondaryButton';
-import Button from '../../components/Button';
 
 const Content = styled.div`
   display: flex;

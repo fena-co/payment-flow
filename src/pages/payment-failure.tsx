@@ -1,14 +1,11 @@
-import Button from '@/components/Button';
-import Layout from '@/components/Layout';
-import SecondaryButton from '@/components/SecondaryButton';
-import { P, Subtitle } from '@/components/Typography';
-import React from 'react';
+import { Button, Layout, SecondaryButton, P, Subtitle } from '@/components';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import cross from '../assets/icons/failed.svg';
 
 const Wrapper = styled.div`
   background-color: #fff;
-  box-shadow: 0px 13px 40px rgba(108, 108, 138, 0.15);
+  box-shadow: 0 13px 40px rgba(108, 108, 138, 0.15);
   border-radius: 10px;
   padding: var(--space-4) var(--space-5);
   @media (max-width: 900px) {
@@ -75,7 +72,7 @@ const Li = styled.li`
 const SecondaryButtonWrapper = styled.div`
   margin-right: var(--space-1);
 `;
-const PaymentSuccessPage: React.FunctionComponent = () => (
+const PaymentSuccessPage: FC = () => (
   <Layout>
     <Wrapper>
       <Top>

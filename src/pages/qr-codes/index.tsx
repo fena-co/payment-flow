@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import SecondaryButton from '@/components/SecondaryButton';
-import Button from '@/components/Button';
-import PaymentDetails from '@/components/PaymentDetails';
-import QrCodeCard from '@/components/QrCodeCard';
-import BankSelect from '@/components/BankSelect';
-import { P, SmallP, Strong } from '@/components/Typography';
-import Layout from '@/components/Layout';
-import Card from '../../components/Card';
+import {
+  SecondaryButton,
+  Button,
+  PaymentDetails,
+  QrCodeCard,
+  BankSelect,
+  P,
+  SmallP,
+  Strong,
+  Layout,
+  Card,
+} from '@/components';
+import Api from '@/utils/api';
+import { Provider } from '@/pages/pay';
 import Header from '../../containers/Header';
 
 const CollapsedCardTitle = styled(Strong)`
@@ -46,6 +52,24 @@ const Link = styled.a`
 `;
 
 const QrCodesPage: React.FunctionComponent = () => {
+  const [activeBank, setActiveBank] = useState<Provider>();
+  const [providersList, setProvidersList] = useState<Array<Provider>>([]);
+  const getProvidersData = async () => {
+    const data = await Api.getProviderList();
+    console.warn(data);
+    setProvidersList(
+      data.map((p) => ({
+        name: p.name,
+        logo: p.logo,
+        externalId: p.externalId,
+      })),
+    );
+  };
+
+  useEffect(() => {
+    getProvidersData();
+  }, []);
+
   const mock = {
     respnsiveTitle:
       typeof window !== `undefined` && window.innerWidth < 900
@@ -59,9 +83,6 @@ const QrCodesPage: React.FunctionComponent = () => {
     sortCode: `20-00-00`,
     paymentReference: `MODE8e7af35f2ca41E`,
   };
-
-  const [activeBank, setActiveBank] =
-    useState<{ label: string; logo: string }>();
 
   return (
     <Layout>
@@ -107,7 +128,11 @@ const QrCodesPage: React.FunctionComponent = () => {
       </ResponsiveCard>
 
       <Card title={mock.respnsiveTitle} isAccordion defaultExpanded>
-        <BankSelect activeBank={activeBank} setActiveBank={setActiveBank} />
+        <BankSelect
+          providerList={providersList}
+          activeBank={activeBank}
+          setActiveBank={setActiveBank}
+        />
       </Card>
       {activeBank && (
         <AgeementText>
