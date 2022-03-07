@@ -27,24 +27,24 @@ const BankIcon = styled.img`
 
 const BankButton = styled.input`
   visibility: hidden;
-  width: 0px;
-  height: 0px;
+  width: 0;
+  height: 0;
 `;
 
 interface BankListProps {
-  label: string;
+  name: string;
   logo: string;
   onClick: () => void;
 }
 const SingleBank: React.FunctionComponent<BankListProps> = ({
-  label,
+  name,
   logo,
   onClick,
 }) => (
   <BankButtonLabel>
     <Left>
       <BankIcon src={logo} alt="bank icon" />
-      {label}
+      {name}
     </Left>
 
     <BankButton type="radio" name="bank" />

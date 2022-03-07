@@ -1,14 +1,19 @@
-import Button from '@/components/Button';
-import Layout from '@/components/Layout';
-import PaymentDetails from '@/components/PaymentDetails';
-import { SmallP, Subtitle } from '@/components/Typography';
-import React from 'react';
+import {
+  Button,
+  Layout,
+  LoadingBlock,
+  PaymentDetails,
+  SmallP,
+  Subtitle,
+} from '@/components';
+import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Api from '@/utils/api';
 import tick from '../assets/icons/ready.svg';
 
 const Wrapper = styled.div`
   background-color: #fff;
-  box-shadow: 0px 13px 40px rgba(108, 108, 138, 0.15);
+  box-shadow: 0 13px 40px rgba(108, 108, 138, 0.15);
   border-radius: 10px;
   padding: var(--space-4) var(--space-5);
   @media (max-width: 900px) {
@@ -58,13 +63,44 @@ const ButtonWrapper = styled.div`
     margin-bottom: var(--space-2);
   }
 `;
-const PaymentSuccessPage: React.FunctionComponent = () => {
+const PaymentSuccessPage: FC<any> = ({ location }) => {
+  const [data, setData] = useState<any>();
+  const params = new URLSearchParams(location.search);
+  const invoiceId = params.get(`i`);
+  const paymentId = params.get(`p`);
+  const type = invoiceId ? `invoice` : `payment`;
+
+  const getPaymentData = async (id: string) => {
+    const res = await Api.getPaymentInfo(id);
+    console.warn(res);
+    setData(res);
+  };
+
+  const getInvoiceData = async (id: string) => {
+    const res = await Api.getInvoiceInfo(id);
+    console.warn(res);
+    setData(res);
+  };
+
+  useEffect(() => {
+    switch (type) {
+      case `invoice`:
+        getInvoiceData(invoiceId);
+        break;
+      case `payment`:
+        getPaymentData(paymentId);
+        break;
+      default:
+    }
+  }, [type]);
+
   const mock = {
     date: `25 Nov 2021, 13:38pm`,
     amount: `50.00`,
     depositTo: `Coinbase`,
     paymentMethod: `Instant Bank Transfer`,
   };
+
   return (
     <Layout>
       <Wrapper>
@@ -76,7 +112,13 @@ const PaymentSuccessPage: React.FunctionComponent = () => {
           <SmallP className="accent-text-gray">{mock.date}</SmallP>
         </Top>
         <Bottom>
-          <PaymentDetails {...mock} />
+          <LoadingBlock loading={!data}>
+            <PaymentDetails
+              amount={data.amount}
+              depositTo={data.company.name}
+              {...mock}
+            />
+          </LoadingBlock>
         </Bottom>
         <ButtonWrapper>
           <Button>Done</Button>
