@@ -6,9 +6,10 @@ import {
   SmallP,
   Subtitle,
 } from '@/components';
+import Api from '@/utils/api';
+import { DateTime } from 'luxon';
 import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Api from '@/utils/api';
 import tick from '../assets/icons/ready.svg';
 
 const Wrapper = styled.div`
@@ -72,13 +73,11 @@ const PaymentSuccessPage: FC<any> = ({ location }) => {
 
   const getPaymentData = async (id: string) => {
     const res = await Api.getPaymentInfo(id);
-    console.warn(res);
     setData(res);
   };
 
   const getInvoiceData = async (id: string) => {
     const res = await Api.getInvoiceInfo(id);
-    console.warn(res);
     setData(res);
   };
 
