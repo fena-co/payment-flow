@@ -113,13 +113,15 @@ const PaymentSuccessPage: FC<any> = ({ location }) => {
           </SmallP>
         </Top>
         <Bottom>
-          <LoadingBlock loading={!data}>
+          {data ? (
             <PaymentDetails
-              amount={data.amount}
-              depositTo={data.company.name}
+              amount={data?.amount}
+              depositTo={data?.company.name}
               {...mock}
             />
-          </LoadingBlock>
+          ) : (
+            <LoadingBlock />
+          )}
         </Bottom>
         <ButtonWrapper>
           <Button>Done</Button>

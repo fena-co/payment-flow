@@ -10,24 +10,13 @@ const Wrapper = styled.div<{ minHeight: number }>`
 `;
 
 export interface LoadingBlockProps {
-  loading?: boolean;
   minHeight?: number;
 }
 
-const LoadingBlock: FC<LoadingBlockProps> = ({
-  children,
-  loading,
-  minHeight = 200,
-}) => {
-  if (loading)
-    return (
-      <Wrapper minHeight={minHeight}>
-        <Spinner width={50} height={50} />
-      </Wrapper>
-    );
-
-  // eslint-disable-next-line react/jsx-no-useless-fragment
-  return <>{children}</>;
-};
+const LoadingBlock: FC<LoadingBlockProps> = ({ minHeight = 200 }) => (
+  <Wrapper minHeight={minHeight}>
+    <Spinner width={50} height={50} />
+  </Wrapper>
+);
 
 export default LoadingBlock;
