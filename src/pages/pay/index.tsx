@@ -135,80 +135,84 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
 
   return (
     <Layout>
-      <LoadingBlock loading={!data} minHeight={300}>
-        <Header title="Bank Select" />
-        <Card
-          defaultExpanded
-          title="Summary"
-          collapsedTitle={
-            <>
-              <CollapsedCardTitle>Summary: </CollapsedCardTitle>
-              Pay
-              {` `}
-              <span className="accent-text-black-bold">
-                £ {` `}
-                {data?.amount}
-              </span>
-              {` `}
-              to
-              {` `}
-              {data?.company?.name}
-            </>
-          }
-          isAccordion
-        >
-          <PaymentDetails
-            amount={data?.amount}
-            depositTo={data?.company?.name}
-            {...mock}
-          />
-        </Card>
-
-        <ResponsiveCard>
+      {data ? (
+        <>
+          <Header title="Bank Select" />
           <Card
             defaultExpanded
-            title="Scan the QR code with your phone "
+            title="Summary"
+            collapsedTitle={
+              <>
+                <CollapsedCardTitle>Summary: </CollapsedCardTitle>
+                Pay
+                {` `}
+                <span className="accent-text-black-bold">
+                  £ {` `}
+                  {data?.amount}
+                </span>
+                {` `}
+                to
+                {` `}
+                {data?.company?.name}
+              </>
+            }
             isAccordion
           >
-            <QrCodeCard />
+            <PaymentDetails
+              amount={data?.amount}
+              depositTo={data?.company?.name}
+              {...mock}
+            />
           </Card>
-        </ResponsiveCard>
 
-        <Card defaultExpanded title={mock.respnsiveTitle} isAccordion>
-          <BankSelect
-            providerList={providersList}
-            activeBank={activeBank}
-            setActiveBank={setActiveBank}
-          />
-        </Card>
-        {activeBank && (
-          <AgeementText>
-            By continuing to your selected bank, you accept our {` `}
-            <Link
-              target="_blank"
-              href="https://www.fena.co/terms-and-conditions/"
+          <ResponsiveCard>
+            <Card
+              defaultExpanded
+              title="Scan the QR code with your phone "
+              isAccordion
             >
-              terms
-            </Link>
-            {` `}
-            and
-            {` `}
-            <Link target="_blank" href="https://www.fena.co/privacy-policy/">
-              privacy policy
-            </Link>
-            .
-          </AgeementText>
-        )}
+              <QrCodeCard />
+            </Card>
+          </ResponsiveCard>
 
-        <Buttons>
-          <CancelButton>
-            <SecondaryButton>Cancel</SecondaryButton>
-          </CancelButton>
-          <Button onClick={onConfirmPayment} disabled={!activeBank}>
-            Continue
-          </Button>
-        </Buttons>
-      </LoadingBlock>
+          <Card defaultExpanded title={mock.respnsiveTitle} isAccordion>
+            <BankSelect
+              providerList={providersList}
+              activeBank={activeBank}
+              setActiveBank={setActiveBank}
+            />
+          </Card>
+          {activeBank && (
+            <AgeementText>
+              By continuing to your selected bank, you accept our {` `}
+              <Link
+                target="_blank"
+                href="https://www.fena.co/terms-and-conditions/"
+              >
+                terms
+              </Link>
+              {` `}
+              and
+              {` `}
+              <Link target="_blank" href="https://www.fena.co/privacy-policy/">
+                privacy policy
+              </Link>
+              .
+            </AgeementText>
+          )}
+
+          <Buttons>
+            <CancelButton>
+              <SecondaryButton>Cancel</SecondaryButton>
+            </CancelButton>
+            <Button onClick={onConfirmPayment} disabled={!activeBank}>
+              Continue
+            </Button>
+          </Buttons>
+        </>
+      ) : (
+        <LoadingBlock minHeight={500} />
+      )}
     </Layout>
   );
 };
