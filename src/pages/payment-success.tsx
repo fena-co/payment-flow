@@ -109,7 +109,9 @@ const PaymentSuccessPage: FC<any> = ({ location }) => {
             <Tick src={tick} alt="tick" />
           </Circle>
           <PageLabel>Payment successful</PageLabel>
-          <SmallP className="accent-text-gray">{mock.date}</SmallP>
+          <SmallP className="accent-text-gray">
+            {DateTime.now().toFormat(`dd LLL yyyy, HH:MM`)}
+          </SmallP>
         </Top>
         <Bottom>
           <LoadingBlock loading={!data}>
