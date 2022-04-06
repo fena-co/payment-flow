@@ -21,7 +21,8 @@
     "test": "jest",
     "commit": "cz",
     "lint-staged": "lint-staged",
-    "commitlint": "commitlint"
+    "commitlint": "commitlint",
+    "co:login": "aws codeartifact login --tool npm --repository fena --domain repo --domain-owner 578657107977"
   },
   "lint-staged": {
     "*.{ts,js,jsx,tsx}": [
