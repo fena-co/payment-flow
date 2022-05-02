@@ -1,4 +1,4 @@
-const apiUrl = process.env.API_URL || `http://localhost:8084`;
+const apiUrl = process.env.API_URL || `https://api.stage.fena.co/`;
 
 class Api {
   private readonly apiUrl: string;
