@@ -79,8 +79,8 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
 
   const getPaymentData = async (id: string) => {
     const res = await Api.getPaymentInfo(id);
-    console.warn(res.result);
-    setData(res.result);
+    console.warn(res);
+    setData(res.data);
   };
 
   const getInvoiceData = async (id: string) => {
