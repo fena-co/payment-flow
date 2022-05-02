@@ -69,7 +69,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     const res = await Api.getProviderList();
     console.warn(res);
     setProvidersList(
-      res.map((p) => ({
+      (res.data || []).map((p) => ({
         name: p.name,
         logo: p.logo,
         externalId: p.externalId,
