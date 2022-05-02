@@ -131,6 +131,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
       default:
     }
     console.warn(providerApiResult);
+    window.open(providerApiResult.data.result.auth_flow.uri, `_blank`);
   };
 
   return (
