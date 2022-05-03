@@ -1,6 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
+import { Spinner } from '@/components/index';
 
 export const StyledButton = styled.button`
   background-color: ${(props) =>
@@ -65,12 +66,14 @@ interface ButtonProps extends React.ButtonHTMLAttributes<any> {
   small?: boolean;
   withImage?: boolean;
   to?: string;
+  loading?: boolean;
 }
 const Button: React.FunctionComponent<ButtonProps> = ({
   children,
   white,
   small,
   withImage,
+  loading,
   to,
   ...rest
 }) => {
@@ -84,7 +87,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        {children}
+        {loading ? <Spinner /> : children}
       </StyledLinkWhite>
     ) : (
       <StyledLink
@@ -95,7 +98,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        {children}
+        {loading ? <Spinner /> : children}
       </StyledLink>
     );
   }
@@ -105,7 +108,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
       aria-atomic={small}
       style={withImage && { padding: 0, background: `none`, width: `10rem` }}
     >
-      {children}
+      {loading ? <Spinner /> : children}
     </StyledButtonWhite>
   ) : (
     <StyledButton
@@ -113,7 +116,7 @@ const Button: React.FunctionComponent<ButtonProps> = ({
       aria-atomic={small}
       style={withImage && { padding: 0, background: `none`, width: `10rem` }}
     >
-      {children}
+      {loading ? <Spinner /> : children}
     </StyledButton>
   );
 };

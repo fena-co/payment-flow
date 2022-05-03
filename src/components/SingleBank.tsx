@@ -23,6 +23,7 @@ const BankIcon = styled.img`
   margin-right: var(--space-1);
   height: 30px;
   width: 30px;
+  object-fit: contain;
 `;
 
 const BankButton = styled.input`

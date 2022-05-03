@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Provider } from '@/pages/pay';
-import { LabelLowerCase, SmallP } from './Typography';
+import { Button } from '@/components/index';
+import { LabelLowerCase /* , SmallP */ } from './Typography';
 import searchIcon from '../assets/icons/searchIcon.svg';
 import SingleBank from './SingleBank';
 import BankListItem from './BankListItem';
@@ -10,6 +11,14 @@ const CardWrapper = styled.section``;
 
 const CardLabel = styled(LabelLowerCase)`
   margin-bottom: var(--space-2);
+`;
+
+const ButtonWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 15px 0;
 `;
 
 const InputSection = styled.div`
@@ -46,7 +55,7 @@ const Banks = styled.div`
   gap: 0.5rem;
 `;
 
-const Banner = styled.div`
+/* const Banner = styled.div`
   background-color: #19385e;
   border-radius: 10px;
   padding: var(--space-2);
@@ -55,18 +64,22 @@ const Banner = styled.div`
 
 const BannerText = styled(SmallP)`
   color: white;
-`;
+`; */
 
 interface BankSelectProps {
   activeBank: Provider;
   setActiveBank: (value: Provider) => void;
   providerList: Array<Provider>;
+  onContinue: () => void;
+  loading?: boolean;
 }
 
 const BankSelect: React.FunctionComponent<BankSelectProps> = ({
   activeBank,
   setActiveBank,
   providerList,
+  onContinue,
+  loading,
 }) => {
   const handleBankClick = (name: string) => () => {
     setActiveBank(providerList.find((item) => item.name === name));
@@ -81,14 +94,14 @@ const BankSelect: React.FunctionComponent<BankSelectProps> = ({
 
   return (
     <CardWrapper>
-      {activeBank && (
+      {/* activeBank && (
         <Banner>
           <BannerText>
             We are redirecting you to your bank. You&#39;ll be sent back here
             after you confirm your deposit
           </BannerText>
         </Banner>
-      )}
+      ) */}
       {!activeBank &&
         (responsiveElement ? (
           <CardLabel>
@@ -119,6 +132,11 @@ const BankSelect: React.FunctionComponent<BankSelectProps> = ({
           <SingleBank onClick={() => changeButtonHandler()} {...activeBank} />
         )}
       </Banks>
+      <ButtonWrapper>
+        <Button onClick={onContinue} disabled={!activeBank} loading={loading}>
+          Continue
+        </Button>
+      </ButtonWrapper>
     </CardWrapper>
   );
 };

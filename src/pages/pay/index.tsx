@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
-  SecondaryButton,
-  Button,
   PaymentDetails,
   QrCodeCard,
   BankSelect,
@@ -12,6 +10,7 @@ import {
   Card,
   LoadingBlock,
 } from '@/components';
+import QRCode from 'qrcode';
 import Header from '../../containers/Header';
 import Api from '../../utils/api';
 
@@ -23,21 +22,6 @@ const ResponsiveCard = styled.div`
   @media (max-width: 900px) {
     display: none;
   }
-`;
-
-const Buttons = styled.div`
-  padding: var(--space-2);
-  display: flex;
-  justify-content: center;
-  @media (max-width: 900px) {
-    bottom: 0;
-    right: 0;
-    left: 0;
-  }
-`;
-
-const CancelButton = styled.div`
-  margin-right: var(--space-2);
 `;
 
 const AgeementText = styled(SmallP)`
@@ -58,6 +42,9 @@ export interface Provider {
 
 const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
   const [data, setData] = useState<any>();
+  const [providerGeneratedLink, setProviderGeneratedLink] = useState(``);
+  const [providerDataLoading, setProviderDataLoading] = useState(false);
+  const [generatedQRData, setGeneratedQRData] = useState<string | undefined>();
   const [providersList, setProvidersList] = useState<Array<Provider>>([]);
   const [activeBank, setActiveBank] = useState<Provider>();
   const params = new URLSearchParams(location.search);
@@ -103,15 +90,23 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
   }, [type]);
 
   const mock = {
-    respnsiveTitle:
-      typeof window !== `undefined` && window.innerWidth < 900
-        ? `Select your bank`
-        : `Can't scan the QR code?`,
+    respnsiveTitle: `Select your bank`,
     date: `25 Nov 2021, 13:38pm`,
     paymentMethod: `Instant Bank Transfer`,
   };
 
-  const onConfirmPayment = async () => {
+  const onBankChange = (bank: Provider | undefined) => {
+    if (!bank) {
+      setGeneratedQRData(undefined);
+      setProviderGeneratedLink(``);
+      setActiveBank(undefined);
+    } else {
+      setActiveBank(bank);
+    }
+  };
+
+  const onContinue = async () => {
+    setProviderDataLoading(true);
     let providerApiResult;
     switch (type) {
       case `invoice`:
@@ -130,8 +125,16 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
         break;
       default:
     }
-    console.warn(providerApiResult);
-    window.open(providerApiResult.data.result.auth_flow.uri, `_blank`);
+    const qr = await QRCode.toDataURL(
+      providerApiResult.data.result.auth_flow.uri,
+    );
+    setGeneratedQRData(qr);
+    setProviderGeneratedLink(providerApiResult.data.result.auth_flow.uri);
+    setProviderDataLoading(false);
+  };
+
+  const onConfirmPayment = () => {
+    window.open(providerGeneratedLink, `_blank`);
   };
 
   return (
@@ -166,23 +169,39 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
             />
           </Card>
 
-          <ResponsiveCard>
-            <Card
-              defaultExpanded
-              title="Scan the QR code with your phone "
-              isAccordion
-            >
-              <QrCodeCard />
-            </Card>
-          </ResponsiveCard>
-
           <Card defaultExpanded title={mock.respnsiveTitle} isAccordion>
             <BankSelect
               providerList={providersList}
               activeBank={activeBank}
-              setActiveBank={setActiveBank}
+              setActiveBank={onBankChange}
+              onContinue={onContinue}
+              loading={providerDataLoading}
             />
           </Card>
+
+          {/* <Buttons>
+            <CancelButton>
+              <SecondaryButton>Cancel</SecondaryButton>
+            </CancelButton>
+            <Button onClick={onContinue} disabled={!activeBank}>
+              Continue
+            </Button>
+          </Buttons> */}
+
+          {providerGeneratedLink && generatedQRData && (
+            <ResponsiveCard>
+              <Card
+                defaultExpanded
+                title="Scan the QR code with your phone or continue on desktop"
+                isAccordion
+              >
+                <QrCodeCard
+                  qrData={generatedQRData}
+                  onContinue={onConfirmPayment}
+                />
+              </Card>
+            </ResponsiveCard>
+          )}
           {activeBank && (
             <AgeementText>
               By continuing to your selected bank, you accept our {` `}
@@ -201,15 +220,6 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
               .
             </AgeementText>
           )}
-
-          <Buttons>
-            <CancelButton>
-              <SecondaryButton>Cancel</SecondaryButton>
-            </CancelButton>
-            <Button onClick={onConfirmPayment} disabled={!activeBank}>
-              Continue
-            </Button>
-          </Buttons>
         </>
       ) : (
         <LoadingBlock minHeight={500} />
