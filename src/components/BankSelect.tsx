@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Provider } from '@/pages/pay';
 import { Button } from '@/components/index';
@@ -81,12 +81,25 @@ const BankSelect: React.FunctionComponent<BankSelectProps> = ({
   onContinue,
   loading,
 }) => {
+  const [filteredProviderList, setFilteredProviderList] =
+    useState(providerList);
+  const [search, setSearch] = useState<string>(``);
+
   const handleBankClick = (name: string) => () => {
     setActiveBank(providerList.find((item) => item.name === name));
   };
 
   const changeButtonHandler = () => {
     setActiveBank(undefined);
+  };
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+    setFilteredProviderList(
+      providerList.filter((item) =>
+        item.name.toLowerCase().includes(event.target.value.toLowerCase()),
+      ),
+    );
   };
 
   const responsiveElement =
@@ -115,13 +128,18 @@ const BankSelect: React.FunctionComponent<BankSelectProps> = ({
       <Banks>
         {!activeBank && (
           <InputSection>
-            <Search type="text" placeholder="Search all banks" />
+            <Search
+              type="text"
+              placeholder="Search all banks"
+              value={search}
+              onChange={handleSearch}
+            />
             <InputIcon src={searchIcon} alt="input icon" />
           </InputSection>
         )}
 
         {!activeBank ? (
-          providerList.map((bank) => (
+          filteredProviderList.map((bank) => (
             <BankListItem
               key={bank.externalId}
               onClick={handleBankClick(bank.name)}
