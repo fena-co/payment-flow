@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { formatAmount, formatSortCode } from '@/utils/format';
 import { P } from './Typography';
 
 const CardWrapper = styled.section``;
@@ -18,7 +19,7 @@ interface PaymentDetailsCardProps {
   amount: string;
   depositTo?: string;
   payTo?: string;
-  paymentMethod: string;
+  paymentMethod?: string;
   accountNumber?: string;
   sortCode?: string;
   paymentReference?: string;
@@ -37,7 +38,7 @@ const PaymentDetails: React.FunctionComponent<PaymentDetailsCardProps> = ({
       <P className="accent-text-gray">Payment amount:</P>
       <Span className="accent-text-black-bold">
         £{` `}
-        {amount}
+        {formatAmount(amount)}
       </Span>
     </PaymentItem>
     {depositTo && (
@@ -53,10 +54,12 @@ const PaymentDetails: React.FunctionComponent<PaymentDetailsCardProps> = ({
       </PaymentItem>
     )}
 
-    <PaymentItem>
-      <P className="accent-text-gray">Payment method:</P>
-      <Span className="accent-text-black">{paymentMethod}</Span>
-    </PaymentItem>
+    {paymentMethod && (
+      <PaymentItem>
+        <P className="accent-text-gray">Payment method:</P>
+        <Span className="accent-text-black">{paymentMethod}</Span>
+      </PaymentItem>
+    )}
     {accountNumber && (
       <PaymentItem>
         <P className="accent-text-gray">Account number:</P>
@@ -66,7 +69,7 @@ const PaymentDetails: React.FunctionComponent<PaymentDetailsCardProps> = ({
     {sortCode && (
       <PaymentItem>
         <P className="accent-text-gray">Sort code:</P>
-        <Span className="accent-text-black">{sortCode}</Span>
+        <Span className="accent-text-black">{formatSortCode(sortCode)}</Span>
       </PaymentItem>
     )}
     {paymentReference && (

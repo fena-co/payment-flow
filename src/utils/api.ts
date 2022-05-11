@@ -49,6 +49,26 @@ class Api {
     });
     return res.json();
   }
+
+  public async markInvoiceAsPaid(id) {
+    const res = await fetch(
+      `${this.apiUrl}/payment-flow/public/invoice/${id}/complete`,
+      {
+        method: `POST`,
+      },
+    );
+    return res.json();
+  }
+
+  public async markPaymentAsPaid(id) {
+    const res = await fetch(
+      `${this.apiUrl}/payment-flow/public/payment/${id}/complete`,
+      {
+        method: `POST`,
+      },
+    );
+    return res.json();
+  }
 }
 
 export default new Api(apiUrl);

@@ -11,6 +11,7 @@ import {
   LoadingBlock,
 } from '@/components';
 import QRCode from 'qrcode';
+import { formatAmount } from '@/utils/format';
 import Header from '../../containers/Header';
 import Api from '../../utils/api';
 
@@ -89,12 +90,6 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     }
   }, [type]);
 
-  const mock = {
-    respnsiveTitle: `Select your bank`,
-    date: `25 Nov 2021, 13:38pm`,
-    paymentMethod: `Instant Bank Transfer`,
-  };
-
   const onBankChange = (bank: Provider | undefined) => {
     if (!bank) {
       setGeneratedQRData(undefined);
@@ -134,7 +129,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
   };
 
   const onConfirmPayment = () => {
-    window.open(providerGeneratedLink, `_blank`);
+    window.location.replace(providerGeneratedLink);
   };
 
   return (
@@ -152,7 +147,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
                 {` `}
                 <span className="accent-text-black-bold">
                   £ {` `}
-                  {data?.amount}
+                  {formatAmount(data.amount)}
                 </span>
                 {` `}
                 to
@@ -163,13 +158,15 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
             isAccordion
           >
             <PaymentDetails
-              amount={data?.amount}
-              depositTo={data?.company?.name}
-              {...mock}
+              amount={data.amount}
+              depositTo={data.company?.name}
+              sortCode={data.beneficiaryBankAccount?.identification}
+              accountNumber={data.beneficiaryBankAccount?.externalAccountId}
+              paymentReference={data.invoiceRefNumber}
             />
           </Card>
 
-          <Card defaultExpanded title={mock.respnsiveTitle} isAccordion>
+          <Card defaultExpanded title="Select your bank" isAccordion>
             <BankSelect
               providerList={providersList}
               activeBank={activeBank}

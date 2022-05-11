@@ -1,15 +1,15 @@
 import {
   Button,
   Layout,
-  // LoadingBlock,
-  // PaymentDetails,
+  LoadingBlock,
+  PaymentDetails,
   SmallP,
   Subtitle,
 } from '@/components';
-// import Api from '@/utils/api';
 import { DateTime } from 'luxon';
-import React, { FC /* , useEffect, useState */ } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Api from '@/utils/api';
 import tick from '../assets/icons/ready.svg';
 
 const Wrapper = styled.div`
@@ -48,9 +48,9 @@ const PageLabel = styled(Subtitle)`
   margin-bottom: var(--space-1);
 `;
 
-/* const Bottom = styled.div`
+const Bottom = styled.div`
   padding-top: var(--space-3);
-`; */
+`;
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -64,42 +64,31 @@ const ButtonWrapper = styled.div`
     margin-bottom: var(--space-2);
   }
 `;
-const PaymentSuccessPage: FC<any> = (/* { location } */) => {
-  console.log(`success`);
-  // const [data, setData] = useState<any>();
-  /* const params = new URLSearchParams(location.search);
-  const invoiceId = params.get(`i`);
-  const paymentId = params.get(`p`);
-  const type = invoiceId ? `invoice` : `payment`;
+const PaymentSuccessPage: FC<any> = ({ location }) => {
+  const [data, setData] = useState<any>();
+  const params = new URLSearchParams(location.search);
+  const anyId = params.get(`customerPaymentId`);
+  const status = params.get(`status`);
 
-  const getPaymentData = async (id: string) => {
-    const res = await Api.getPaymentInfo(id);
-    setData(res);
+  const getData = async (id: string) => {
+    try {
+      const res = await Api.getPaymentInfo(id);
+      setData(res);
+      if (status === `executed`) {
+        await Api.markPaymentAsPaid(id);
+      }
+    } catch (e) {
+      const res = await Api.getInvoiceInfo(id);
+      setData(res);
+      if (status === `executed`) {
+        await Api.markInvoiceAsPaid(id);
+      }
+    }
   };
 
-  const getInvoiceData = async (id: string) => {
-    const res = await Api.getInvoiceInfo(id);
-    setData(res);
-  }; */
-
-  /* useEffect(() => {
-    switch (type) {
-      case `invoice`:
-        getInvoiceData(invoiceId);
-        break;
-      case `payment`:
-        getPaymentData(paymentId);
-        break;
-      default:
-    }
-  }, [type]); */
-
-  /* const mock = {
-    date: `25 Nov 2021, 13:38pm`,
-    amount: `50.00`,
-    depositTo: `Coinbase`,
-    paymentMethod: `Instant Bank Transfer`,
-  }; */
+  useEffect(() => {
+    getData(anyId);
+  }, []);
 
   return (
     <Layout>
@@ -113,17 +102,16 @@ const PaymentSuccessPage: FC<any> = (/* { location } */) => {
             {DateTime.now().toFormat(`dd LLL yyyy, HH:MM`)}
           </SmallP>
         </Top>
-        {/* <Bottom>
+        <Bottom>
           {data ? (
             <PaymentDetails
               amount={data?.amount}
               depositTo={data?.company.name}
-              {...mock}
             />
           ) : (
             <LoadingBlock />
           )}
-        </Bottom> */}
+        </Bottom>
         <ButtonWrapper>
           <Button>Done</Button>
         </ButtonWrapper>
