@@ -47,27 +47,24 @@ const QrCodeIcon = styled.img`
 const QrCodeCard: React.FunctionComponent<{
   qrData: string;
   onContinue: () => void;
-}> = ({ qrData, onContinue }) => {
-  console.log(qrData);
-  return (
-    <CardWrapper>
-      <QrCodeWrapper>
-        <QrCodeImg src={qrData} alt="qr code image" />
-      </QrCodeWrapper>
+}> = ({ qrData, onContinue }) => (
+  <CardWrapper>
+    <QrCodeWrapper>
+      <QrCodeImg src={qrData} alt="qr code image" />
+    </QrCodeWrapper>
 
-      <Items>
-        <QrCodeHintItem>
-          <QrCodeIcon src={qrCodeIcon} alt="qr code icon" />
-          <P>Scan QR Code to open checkout link</P>
-        </QrCodeHintItem>
-        <QrCodeHintItem>
-          <ButtonWrapper>
-            <Button onClick={onContinue}>Continue on desktop</Button>
-          </ButtonWrapper>
-        </QrCodeHintItem>
-      </Items>
-    </CardWrapper>
-  );
-};
+    <Items>
+      <QrCodeHintItem>
+        <QrCodeIcon src={qrCodeIcon} alt="qr code icon" />
+        <P>Scan QR Code to open checkout link</P>
+      </QrCodeHintItem>
+      <QrCodeHintItem>
+        <ButtonWrapper>
+          <Button onClick={onContinue}>Continue on desktop</Button>
+        </ButtonWrapper>
+      </QrCodeHintItem>
+    </Items>
+  </CardWrapper>
+);
 
 export default QrCodeCard;
