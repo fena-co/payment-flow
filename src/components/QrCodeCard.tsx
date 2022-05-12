@@ -7,12 +7,11 @@ import { P } from './Typography';
 
 const CardWrapper = styled.div`
   display: flex;
-  align-items: center;
 `;
 
 const QrCodeImg = styled.img`
-  height: 300px;
-  width: 300px;
+  height: 200px;
+  width: 200px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -20,11 +19,11 @@ const ButtonWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 15px 0;
 `;
 
 const Items = styled.div`
-  margin-left: var(--space-3);
+  margin-top: var(--space-2);
+  margin-left: 4rem;
 `;
 
 const QrCodeHintItem = styled.div`
@@ -35,6 +34,12 @@ const QrCodeHintItem = styled.div`
   }
 `;
 
+const QrCodeWrapper = styled.div`
+  padding: var(--space-1);
+  border: 1px solid #dbe3eb;
+  border-radius: 10px;
+`;
+
 const QrCodeIcon = styled.img`
   margin-right: var(--space-2);
 `;
@@ -42,21 +47,27 @@ const QrCodeIcon = styled.img`
 const QrCodeCard: React.FunctionComponent<{
   qrData: string;
   onContinue: () => void;
-}> = ({ qrData, onContinue }) => (
-  <CardWrapper>
-    <QrCodeImg src={qrData} alt="qr code image" />
-    <Items>
-      <QrCodeHintItem>
-        <QrCodeIcon src={qrCodeIcon} alt="qr code icon" />
-        <P>Scan QR Code to open checkout link</P>
-      </QrCodeHintItem>
-      <QrCodeHintItem>
-        <ButtonWrapper>
-          <Button onClick={onContinue}>Continue on desktop</Button>
-        </ButtonWrapper>
-      </QrCodeHintItem>
-    </Items>
-  </CardWrapper>
-);
+}> = ({ qrData, onContinue }) => {
+  console.log(qrData);
+  return (
+    <CardWrapper>
+      <QrCodeWrapper>
+        <QrCodeImg src={qrData} alt="qr code image" />
+      </QrCodeWrapper>
+
+      <Items>
+        <QrCodeHintItem>
+          <QrCodeIcon src={qrCodeIcon} alt="qr code icon" />
+          <P>Scan QR Code to open checkout link</P>
+        </QrCodeHintItem>
+        <QrCodeHintItem>
+          <ButtonWrapper>
+            <Button onClick={onContinue}>Continue on desktop</Button>
+          </ButtonWrapper>
+        </QrCodeHintItem>
+      </Items>
+    </CardWrapper>
+  );
+};
 
 export default QrCodeCard;
