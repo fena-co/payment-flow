@@ -73,8 +73,8 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
 
   const getInvoiceData = async (id: string) => {
     const res = await Api.getInvoiceInfo(id);
-    console.warn(res.result);
-    setData(res.result);
+    console.warn(res.data);
+    setData(res.data);
   };
 
   useEffect(() => {
