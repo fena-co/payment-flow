@@ -1,5 +1,5 @@
 export const formatSortCode = (sortCode: string) =>
-  sortCode.match(/.{1,2}/g).join(`-`);
+  sortCode ? sortCode.match(/.{1,2}/g).join(`-`) : ``;
 
 export const formatAmount = (amount: string) => {
   let result = ``;
