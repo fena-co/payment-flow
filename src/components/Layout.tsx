@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { P } from './Typography';
+// import { P } from './Typography';
 
 const Section = styled.section`
   height: calc(100vh - 5rem * 2);
@@ -14,7 +14,7 @@ const Section = styled.section`
   }
 `;
 
-const Banner = styled.div`
+/* const Banner = styled.div`
   padding: var(--space-2);
   background: linear-gradient(
     270deg,
@@ -32,15 +32,10 @@ const Banner = styled.div`
 
 const BannerText = styled(P)`
   color: white;
-`;
+`; */
 
 const Layout: React.FunctionComponent = ({ children }) => (
-  <Section>
-    <Banner>
-      <BannerText>You are currently in sandbox mode</BannerText>
-    </Banner>
-    {children}
-  </Section>
+  <Section>{children}</Section>
 );
 
 export default Layout;

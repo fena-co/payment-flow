@@ -69,6 +69,16 @@ class Api {
     );
     return res.json();
   }
+
+  public async getLastPaymentByTerminal(terminalId) {
+    const res = await fetch(
+      `${this.apiUrl}/payment-flow/public/terminal/${terminalId}`,
+      {
+        method: `GET`,
+      },
+    );
+    return res.json();
+  }
 }
 
 export default new Api(apiUrl);

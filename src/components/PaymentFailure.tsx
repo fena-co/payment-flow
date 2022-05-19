@@ -1,7 +1,8 @@
-import { Button, Layout, SecondaryButton, P, Subtitle } from '@/components';
-import React, { FC } from 'react';
+import cross from '@/assets/icons/failed.svg';
+import { P, Subtitle } from '@/components/Typography';
+import { Button, SecondaryButton } from '@/components/index';
+import React from 'react';
 import styled from 'styled-components';
-import cross from '../assets/icons/failed.svg';
 
 const Wrapper = styled.div`
   background-color: #fff;
@@ -72,41 +73,38 @@ const Li = styled.li`
 const SecondaryButtonWrapper = styled.div`
   margin-right: var(--space-1);
 `;
-const PaymentSuccessPage: FC = () => (
-  <Layout>
-    <Wrapper>
-      <Top>
-        <Circle>
-          <Tick src={cross} alt="tick" />
-        </Circle>
-        <PageLabel>Payment was not successful</PageLabel>
-      </Top>
-      <Bottom>
-        <P>
-          In the case your payment showing a failed transaction, please do the
-          following:
-        </P>
-        <Ol>
-          <Li className="accent-text-gray">
-            Double check the mobile number you entered is correct.
-          </Li>
-          <Li className="accent-text-gray">
-            Check your number is registered with your passport or ID number.
-          </Li>
-          <Li className="accent-text-gray">
-            Check that your number is active and not expired.
-          </Li>
-        </Ol>
-      </Bottom>
-      <ButtonWrapper>
-        <SecondaryButtonWrapper>
-          <SecondaryButton>Cancel</SecondaryButton>
-        </SecondaryButtonWrapper>
 
-        <Button>Try again</Button>
-      </ButtonWrapper>
-    </Wrapper>
-  </Layout>
+export const PaymentFailure = () => (
+  <Wrapper>
+    <Top>
+      <Circle>
+        <Tick src={cross} alt="tick" />
+      </Circle>
+      <PageLabel>Payment was not successful</PageLabel>
+    </Top>
+    <Bottom>
+      <P>
+        In the case your payment showing a failed transaction, please do the
+        following:
+      </P>
+      <Ol>
+        <Li className="accent-text-gray">
+          Double check the mobile number you entered is correct.
+        </Li>
+        <Li className="accent-text-gray">
+          Check your number is registered with your passport or ID number.
+        </Li>
+        <Li className="accent-text-gray">
+          Check that your number is active and not expired.
+        </Li>
+      </Ol>
+    </Bottom>
+    <ButtonWrapper>
+      <SecondaryButtonWrapper>
+        <SecondaryButton>Cancel</SecondaryButton>
+      </SecondaryButtonWrapper>
+
+      <Button>Try again</Button>
+    </ButtonWrapper>
+  </Wrapper>
 );
-
-export default PaymentSuccessPage;
