@@ -19,12 +19,6 @@ const CollapsedCardTitle = styled(Strong)`
   text-transform: uppercase;
 `;
 
-const ResponsiveCard = styled.div`
-  @media (max-width: 900px) {
-    display: none;
-  }
-`;
-
 const AgeementText = styled(SmallP)`
   text-align: center;
   margin-top: var(--space-2);
@@ -120,6 +114,10 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
         break;
       default:
     }
+    if (typeof window !== `undefined` && window.innerWidth < 900) {
+      window.location.replace(providerApiResult.data.result.auth_flow.uri);
+      return;
+    }
     const qr = await QRCode.toDataURL(
       providerApiResult.data.result.auth_flow.uri,
     );
@@ -187,18 +185,16 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
           </Buttons> */}
 
           {providerGeneratedLink && generatedQRData && (
-            <ResponsiveCard>
-              <Card
-                defaultExpanded
-                title="Scan the QR code with your phone or continue on desktop"
-                isAccordion
-              >
-                <QrCodeCard
-                  qrData={generatedQRData}
-                  onContinue={onConfirmPayment}
-                />
-              </Card>
-            </ResponsiveCard>
+            <Card
+              defaultExpanded
+              title="Scan the QR code with your phone or continue on desktop"
+              isAccordion
+            >
+              <QrCodeCard
+                qrData={generatedQRData}
+                onContinue={onConfirmPayment}
+              />
+            </Card>
           )}
           {activeBank && (
             <AgeementText>
