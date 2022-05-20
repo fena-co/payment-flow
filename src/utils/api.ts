@@ -35,6 +35,7 @@ class Api {
   }
 
   public async initiatePayment(id, type, provider) {
+    console.log(`starting initiation`);
     const res = await fetch(`${this.apiUrl}/payment-flow/initiate`, {
       method: `POST`,
       headers: {

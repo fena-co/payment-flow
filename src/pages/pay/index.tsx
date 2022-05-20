@@ -129,6 +129,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
   };
 
   const onConfirmPayment = () => {
+    console.warn(`pgl`, providerGeneratedLink);
     window.location.replace(providerGeneratedLink);
   };
 
