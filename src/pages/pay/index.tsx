@@ -158,7 +158,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
           >
             <PaymentDetails
               amount={data.amount}
-              depositTo={data.company?.name}
+              payTo={data.company?.name}
               sortCode={data.beneficiaryBankAccount?.identification}
               accountNumber={data.beneficiaryBankAccount?.externalAccountId}
               paymentReference={data.invoiceRefNumber}
