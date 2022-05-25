@@ -9,9 +9,11 @@ import {
   Layout,
   Card,
   LoadingBlock,
+  P,
 } from '@/components';
 import QRCode from 'qrcode';
 import { formatAmount } from '@/utils/format';
+import { payableInvoiceStatuses, payablePaymentStatuses } from '@fena/types';
 import Header from '../../containers/Header';
 import Api from '../../utils/api';
 
@@ -130,6 +132,25 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     console.warn(`pgl`, providerGeneratedLink);
     window.location.replace(providerGeneratedLink);
   };
+
+  if (
+    data?.status &&
+    ![...payableInvoiceStatuses, payablePaymentStatuses].includes(data.status)
+  ) {
+    return (
+      <Layout>
+        <Card
+          defaultExpanded
+          title="The payment was cancelled or the link is expired"
+        >
+          <P className="accent-text-gray">
+            Your payment has been cancelled by the merchant or the link has
+            expired. Please contact {data.company.name} to get a new one!
+          </P>
+        </Card>
+      </Layout>
+    );
+  }
 
   return (
     <Layout>

@@ -1,7 +1,7 @@
 import tick from '@/assets/icons/ready.svg';
 import { SmallP, Subtitle } from '@/components/Typography';
 import { DateTime } from 'luxon';
-import { Button, LoadingBlock, PaymentDetails } from '@/components/index';
+import { LoadingBlock, PaymentDetails } from '@/components/index';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -45,49 +45,24 @@ const Bottom = styled.div`
   padding-top: var(--space-3);
 `;
 
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin-top: var(--space-3);
-  @media (max-width: 900px) {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    margin-bottom: var(--space-2);
-  }
-`;
-
-export const PaymentSuccess = ({ data }) => {
-  const handleDone = () => {
-    if (window) {
-      window.close();
-    }
-  };
-  return (
-    <Wrapper>
-      <Top>
-        <Circle>
-          <Tick src={tick} alt="tick" />
-        </Circle>
-        <PageLabel>Payment successful</PageLabel>
-        <SmallP className="accent-text-gray">
-          {DateTime.now().toFormat(`dd LLL yyyy, HH:MM`)}
-        </SmallP>
-      </Top>
-      <Bottom>
-        {data ? (
-          <PaymentDetails
-            amount={data?.amount}
-            depositTo={data?.company.name}
-          />
-        ) : (
-          <LoadingBlock />
-        )}
-      </Bottom>
-      <ButtonWrapper>
-        <Button onClick={handleDone}>Done</Button>
-      </ButtonWrapper>
-    </Wrapper>
-  );
-};
+export const PaymentSuccess = ({ data }) => (
+  <Wrapper>
+    <Top>
+      <Circle>
+        <Tick src={tick} alt="tick" />
+      </Circle>
+      <PageLabel>Payment successful</PageLabel>
+      <SmallP className="accent-text-gray">
+        {DateTime.now().toFormat(`dd LLL yyyy, HH:MM`)}
+      </SmallP>
+    </Top>
+    <Bottom>
+      {data ? (
+        <PaymentDetails amount={data?.amount} depositTo={data?.company.name} />
+      ) : (
+        <LoadingBlock />
+      )}
+    </Bottom>
+    <SmallP>You can now close this page</SmallP>
+  </Wrapper>
+);

@@ -9,9 +9,9 @@ const PaymentSuccessPage: FC<any> = ({ location }) => {
   const params = new URLSearchParams(location.search);
   const externalId = params.get(`customerPaymentId`);
   const status = params.get(`status`);
+  const [type, id] = externalId.split(`_`);
 
-  const getData = async (exId: string) => {
-    const [type, id] = exId.split(`_`);
+  const getData = async () => {
     let res;
     switch (type) {
       case `payment`:
@@ -29,7 +29,7 @@ const PaymentSuccessPage: FC<any> = ({ location }) => {
   };
 
   useEffect(() => {
-    getData(externalId);
+    getData();
   }, []);
 
   if (!data || !data?.company?.name) {
@@ -41,7 +41,7 @@ const PaymentSuccessPage: FC<any> = ({ location }) => {
       {status === `executed` ? (
         <PaymentSuccess data={data} />
       ) : (
-        <PaymentFailure />
+        <PaymentFailure externalId={id} type={type} />
       )}
     </Layout>
   );
