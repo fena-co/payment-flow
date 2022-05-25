@@ -13,7 +13,12 @@ import {
 } from '@/components';
 import QRCode from 'qrcode';
 import { formatAmount } from '@/utils/format';
-import { payableInvoiceStatuses, payablePaymentStatuses } from '@fena/types';
+import {
+  InvoiceStatus,
+  payableInvoiceStatuses,
+  payablePaymentStatuses,
+  PaymentStatus,
+} from '@fena/types';
 import Header from '../../containers/Header';
 import Api from '../../utils/api';
 
@@ -64,12 +69,42 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
   const getPaymentData = async (id: string) => {
     const res = await Api.getPaymentInfo(id);
     console.warn(res);
+    if (window && data.status && res.data.status !== data.status) {
+      let url = `${window.location.origin}/payment-success/?customerPaymentId=payment_${id}`;
+      switch (data.status) {
+        case PaymentStatus.PAID:
+          url += `&status=executed`;
+          break;
+        case PaymentStatus.REJECTED:
+          url += `&status=rejected`;
+          break;
+        default:
+          url += `&status=cancelled`;
+          break;
+      }
+      window.location.replace(url);
+    }
     setData(res.data);
   };
 
   const getInvoiceData = async (id: string) => {
     const res = await Api.getInvoiceInfo(id);
     console.warn(res.data);
+    if (window && data.status && res.data.status !== data.status) {
+      let url = `${window.location.origin}/payment-success/?customerPaymentId=invoice_${id}`;
+      switch (data.status) {
+        case InvoiceStatus.PAID:
+          url += `&status=executed`;
+          break;
+        case InvoiceStatus.REJECTED:
+          url += `&status=rejected`;
+          break;
+        default:
+          url += `&status=cancelled`;
+          break;
+      }
+      window.location.replace(url);
+    }
     setData(res.data);
   };
 
@@ -93,6 +128,18 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
       setActiveBank(undefined);
     } else {
       setActiveBank(bank);
+    }
+  };
+
+  const pollPayment = () => {
+    switch (type) {
+      case `invoice`:
+        getInvoiceData(invoiceId);
+        break;
+      case `payment`:
+        getPaymentData(paymentId);
+        break;
+      default:
     }
   };
 
@@ -120,6 +167,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
       window.location.replace(providerApiResult.data.result.auth_flow.uri);
       return;
     }
+    setInterval(pollPayment, 1000);
     const qr = await QRCode.toDataURL(
       providerApiResult.data.result.auth_flow.uri,
     );
