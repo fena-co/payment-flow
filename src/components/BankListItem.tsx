@@ -11,8 +11,17 @@ const BankButtonLabel = styled.label`
   cursor: pointer;
   flex-basis: 25%;
   flex-grow: 1;
+
+  &:last-child {
+    flex-grow: 0;
+    flex-basis: 28%;
+  }
   @media (max-width: 900px) {
     flex-basis: 100%;
+    &:last-child {
+      flex-grow: 1;
+      flex-basis: 100%;
+    }
   }
 `;
 
