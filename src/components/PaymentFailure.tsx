@@ -57,19 +57,6 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-const Ol = styled.ol`
-  margin-top: var(--space-3);
-`;
-
-const Li = styled.li`
-  color: var(--dark-text);
-  margin-bottom: var(--space-2);
-  ::marker {
-    font-weight: bold;
-    color: var(--dark-text);
-  }
-`;
-
 export const PaymentFailure = ({ externalId, type }) => {
   const onRetry = () => {
     if (window) {
@@ -89,20 +76,9 @@ export const PaymentFailure = ({ externalId, type }) => {
       </Top>
       <Bottom>
         <P>
-          In the case your payment showing a failed transaction, please do the
-          following:
+          If your payment failed unexpectedly, please try the payment again. If
+          the issue persists, please contact support@fena.co for help
         </P>
-        <Ol>
-          <Li className="accent-text-gray">
-            Double check the mobile number you entered is correct.
-          </Li>
-          <Li className="accent-text-gray">
-            Check your number is registered with your passport or ID number.
-          </Li>
-          <Li className="accent-text-gray">
-            Check that your number is active and not expired.
-          </Li>
-        </Ol>
       </Bottom>
       <ButtonWrapper>
         <Button onClick={onRetry}>Try again</Button>
