@@ -69,7 +69,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
   const getPaymentData = async (id: string) => {
     const res = await Api.getPaymentInfo(id);
     console.warn(res);
-    if (window && data?.status && res.data.status !== data.status) {
+    if (window && data?.status && res.data?.status !== data?.status) {
       let url = `${window.location.origin}/payment-success/?customerPaymentId=payment_${id}`;
       switch (data.status) {
         case PaymentStatus.PAID:
@@ -90,7 +90,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
   const getInvoiceData = async (id: string) => {
     const res = await Api.getInvoiceInfo(id);
     console.warn(res.data);
-    if (window && data.status && res.data.status !== data.status) {
+    if (window && data?.status && res.data?.status !== data?.status) {
       let url = `${window.location.origin}/payment-success/?customerPaymentId=invoice_${id}`;
       switch (data.status) {
         case InvoiceStatus.PAID:
