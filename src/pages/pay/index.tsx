@@ -71,7 +71,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     console.warn(res);
     if (window && data?.status && res.data?.status !== data?.status) {
       let url = `${window.location.origin}/payment-success/?customerPaymentId=payment_${id}`;
-      switch (data.status) {
+      switch (res.data.status) {
         case PaymentStatus.PAID:
           url += `&status=executed`;
           break;
@@ -79,7 +79,6 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
           url += `&status=rejected`;
           break;
         default:
-          url += `&status=cancelled`;
           break;
       }
       window.location.replace(url);
@@ -92,7 +91,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     console.warn(res.data);
     if (window && data?.status && res.data?.status !== data?.status) {
       let url = `${window.location.origin}/payment-success/?customerPaymentId=invoice_${id}`;
-      switch (data.status) {
+      switch (res.data.status) {
         case InvoiceStatus.PAID:
           url += `&status=executed`;
           break;
@@ -100,7 +99,6 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
           url += `&status=rejected`;
           break;
         default:
-          url += `&status=cancelled`;
           break;
       }
       window.location.replace(url);
@@ -170,6 +168,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     setInterval(pollPayment, 1000);
     const qr = await QRCode.toDataURL(
       providerApiResult.data.result.auth_flow.uri,
+      { errorCorrectionLevel: `low` },
     );
     setGeneratedQRData(qr);
     setProviderGeneratedLink(providerApiResult.data.result.auth_flow.uri);

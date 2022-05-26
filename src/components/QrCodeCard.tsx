@@ -7,11 +7,13 @@ import { P } from './Typography';
 
 const CardWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const QrCodeImg = styled.img`
-  height: 200px;
-  width: 200px;
+  height: 400px;
+  width: 400px;
 `;
 
 const ButtonWrapper = styled.div`
@@ -23,7 +25,6 @@ const ButtonWrapper = styled.div`
 
 const Items = styled.div`
   margin-top: var(--space-2);
-  margin-left: 4rem;
 `;
 
 const QrCodeHintItem = styled.div`
