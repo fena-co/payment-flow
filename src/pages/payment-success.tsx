@@ -9,7 +9,7 @@ const PaymentSuccessPage: FC<any> = ({ location }) => {
   const params = new URLSearchParams(location.search);
   const externalId = params.get(`customerPaymentId`);
   const status = params.get(`status`);
-  const [type, id] = externalId.split(`_`);
+  const [type, id] = (externalId || ``).split(`_`);
 
   const getData = async () => {
     let res;
