@@ -266,7 +266,8 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
           )}
           {activeBank && (
             <AgeementText>
-              By continuing to your selected bank, you accept our {` `}
+              By continuing to your selected bank, you accept Fena Labs Ltd
+              {` `}
               <Link
                 target="_blank"
                 href="https://www.fena.co/terms-and-conditions/"
@@ -279,7 +280,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
               <Link target="_blank" href="https://www.fena.co/privacy-policy/">
                 privacy policy
               </Link>
-              .
+              , and consent to them setting up the payment request
             </AgeementText>
           )}
         </>
