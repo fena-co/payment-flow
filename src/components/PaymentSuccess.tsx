@@ -58,7 +58,7 @@ export const PaymentSuccess = ({ data }) => (
     </Top>
     <Bottom>
       {data ? (
-        <PaymentDetails amount={data?.amount} depositTo={data?.company.name} />
+        <PaymentDetails amount={data?.amount} paidTo={data?.company.name} />
       ) : (
         <LoadingBlock />
       )}
