@@ -57,6 +57,10 @@ const ButtonWrapper = styled.div`
   }
 `;
 
+const StyledP = styled(P)`
+  text-align: center;
+`;
+
 export const PaymentFailure = ({ externalId, type }) => {
   const onRetry = () => {
     if (window) {
@@ -75,10 +79,10 @@ export const PaymentFailure = ({ externalId, type }) => {
         <PageLabel>Payment was not successful</PageLabel>
       </Top>
       <Bottom>
-        <P>
+        <StyledP>
           If your payment failed unexpectedly, please try the payment again. If
           the issue persists, please contact support@fena.co for help
-        </P>
+        </StyledP>
       </Bottom>
       <ButtonWrapper>
         <Button onClick={onRetry}>Try again</Button>

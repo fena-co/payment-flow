@@ -45,6 +45,11 @@ const Bottom = styled.div`
   padding-top: var(--space-3);
 `;
 
+const StyledSmallP = styled(SmallP)`
+  margin-top: var(--space-3);
+  text-align: center;
+`;
+
 export const PaymentSuccess = ({ data }) => (
   <Wrapper>
     <Top>
@@ -53,7 +58,9 @@ export const PaymentSuccess = ({ data }) => (
       </Circle>
       <PageLabel>Payment successful</PageLabel>
       <SmallP className="accent-text-gray">
-        {DateTime.now().toFormat(`dd LLL yyyy, HH:MM`)}
+        {data?.completedAt
+          ? DateTime.fromJSDate(data.completedAt).toFormat(`dd LLL yyyy, HH:MM`)
+          : DateTime.now().toFormat(`dd LLL yyyy, HH:MM`)}
       </SmallP>
     </Top>
     <Bottom>
@@ -63,6 +70,6 @@ export const PaymentSuccess = ({ data }) => (
         <LoadingBlock />
       )}
     </Bottom>
-    <SmallP>You can now close this page</SmallP>
+    <StyledSmallP>You can now close this page</StyledSmallP>
   </Wrapper>
 );
