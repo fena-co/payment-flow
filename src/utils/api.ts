@@ -1,4 +1,5 @@
-const apiUrl = process.env.GATSBY_API_URL || `https://api.stage.fena.co`;
+const apiUrl =
+  process.env.GATSBY_API_URL || `https://business.api.staging.fena.co`;
 
 class Api {
   private readonly apiUrl: string;
