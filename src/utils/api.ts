@@ -1,5 +1,6 @@
 const apiUrl =
   process.env.GATSBY_API_URL || `https://business.api.staging.fena.co`;
+console.warn(process.env);
 
 class Api {
   private readonly apiUrl: string;
