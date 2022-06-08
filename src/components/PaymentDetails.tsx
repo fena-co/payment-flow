@@ -58,7 +58,7 @@ const PaymentDetails: React.FunctionComponent<PaymentDetailsCardProps> = ({
     {paidTo && (
       <PaymentItem className="accent-text-gray">
         <P className="accent-text-gray">Paid to:</P>
-        <Span className="accent-text-black">{payTo}</Span>
+        <Span className="accent-text-black">{paidTo}</Span>
       </PaymentItem>
     )}
 
