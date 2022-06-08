@@ -59,8 +59,8 @@ export const PaymentSuccess = ({ data }) => (
       <PageLabel>Payment successful</PageLabel>
       <SmallP className="accent-text-gray">
         {data?.completedAt
-          ? DateTime.fromISO(data.completedAt).toFormat(`dd LLL yyyy, HH:MM`)
-          : DateTime.now().toFormat(`dd LLL yyyy, HH:MM`)}
+          ? DateTime.fromISO(data.completedAt).toFormat(`dd LLL yyyy, HH:mm`)
+          : DateTime.now().toFormat(`dd LLL yyyy, HH:mm`)}
       </SmallP>
     </Top>
     <Bottom>
