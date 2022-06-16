@@ -7,8 +7,10 @@ import { PaymentPending } from '@/components/PaymentPending';
 
 const PaymentSuccessPage: FC<any> = ({ location }) => {
   const [data, setData] = useState<any>();
+  const [refreshLoading, setRefreshLoading] = useState(false);
   const params = new URLSearchParams(location.search);
   const externalId = params.get(`customerPaymentId`);
+  const providerId = params.get(`id`);
   const [status, setStatus] = useState(params.get(`status`));
   const [type, id] = (externalId || ``).split(`_`);
 
@@ -35,18 +37,28 @@ const PaymentSuccessPage: FC<any> = ({ location }) => {
   }, []);
 
   const onRefresh = async () => {
-    const result = await getData();
-    if (result.data) {
-      switch (result.data.status) {
-        case `paid`:
-          setStatus(`executed`);
-          break;
-        case `rejected`:
-        case `cancelled`:
-          setStatus(`rejected`);
-          break;
-        default:
+    setRefreshLoading(true);
+    try {
+      const result = await Api.manuallyGetStatusFromProvider(providerId);
+      if (result.data) {
+        switch (result.data.status) {
+          case `paid`:
+            setStatus(`executed`);
+            break;
+          case `pending`:
+            setStatus(`pending`);
+            break;
+          case `rejected`:
+          case `cancelled`:
+            setStatus(`rejected`);
+            break;
+          default:
+        }
       }
+      setRefreshLoading(false);
+    } catch (e) {
+      console.error(e);
+      setRefreshLoading(false);
     }
   };
 
@@ -60,7 +72,11 @@ const PaymentSuccessPage: FC<any> = ({ location }) => {
       {status === `executed` ? (
         <PaymentSuccess data={data} />
       ) : status === `pending` ? (
-        <PaymentPending data={data} onRefresh={onRefresh} />
+        <PaymentPending
+          data={data}
+          onRefresh={onRefresh}
+          refreshLoading={refreshLoading}
+        />
       ) : (
         <PaymentFailure externalId={id} type={type} />
       )}
