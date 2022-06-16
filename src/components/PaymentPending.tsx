@@ -57,7 +57,7 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-export const PaymentPending = ({ data, onRefresh }) => (
+export const PaymentPending = ({ data, onRefresh, refreshLoading }) => (
   <Wrapper>
     <Top>
       <Circle>
@@ -73,7 +73,9 @@ export const PaymentPending = ({ data, onRefresh }) => (
       )}
     </Bottom>
     <ButtonWrapper>
-      <Button onClick={onRefresh}>Refresh</Button>
+      <Button loading={refreshLoading} onClick={onRefresh}>
+        Refresh
+      </Button>
     </ButtonWrapper>
   </Wrapper>
 );
