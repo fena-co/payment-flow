@@ -1,6 +1,6 @@
-import cross from '@/assets/icons/failed.svg';
-import { P, Subtitle } from '@/components/Typography';
-import { Button } from '@/components/index';
+import yellowBank from '@/assets/icons/yellowBank.svg';
+import { Subtitle } from '@/components/Typography';
+import { Button, LoadingBlock, PaymentDetails } from '@/components/index';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -27,8 +27,8 @@ const Circle = styled.div`
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  background-color: #ef6355;
-  border: 10px solid #ffe8e6;
+  background-color: #2cd19e;
+  border: 10px solid #ccf0e3;
   height: 60px;
   width: 60px;
   border-radius: 50%;
@@ -57,36 +57,25 @@ const ButtonWrapper = styled.div`
   }
 `;
 
-const StyledP = styled(P)`
-  text-align: center;
-`;
-
-export const PaymentFailure = ({ externalId, type }) => {
-  const onRetry = () => {
-    if (window) {
-      const url = `${window.location.origin}/pay/?${
-        type === `payment` ? `p` : `i`
-      }=${externalId}`;
-      window.location.replace(url);
-    }
-  };
-  return (
-    <Wrapper>
-      <Top>
-        <Circle>
-          <Tick src={cross} alt="tick" />
-        </Circle>
-        <PageLabel>Payment was not successful</PageLabel>
-      </Top>
-      <Bottom>
-        <StyledP>
-          If your payment failed unexpectedly, please try the payment again. If
-          the issue persists, please contact support@fena.co for help
-        </StyledP>
-      </Bottom>
-      <ButtonWrapper>
-        <Button onClick={onRetry}>Try again</Button>
-      </ButtonWrapper>
-    </Wrapper>
-  );
-};
+export const PaymentPending = ({ data, onRefresh, refreshLoading }) => (
+  <Wrapper>
+    <Top>
+      <Circle>
+        <Tick src={yellowBank} alt="tick" />
+      </Circle>
+      <PageLabel>Payment pending</PageLabel>
+    </Top>
+    <Bottom>
+      {data ? (
+        <PaymentDetails amount={data?.amount} paidTo={data?.company.name} />
+      ) : (
+        <LoadingBlock />
+      )}
+    </Bottom>
+    <ButtonWrapper>
+      <Button loading={refreshLoading} onClick={onRefresh}>
+        Refresh
+      </Button>
+    </ButtonWrapper>
+  </Wrapper>
+);

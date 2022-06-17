@@ -1,4 +1,7 @@
-const apiUrl = process.env.API_URL || `https://api.stage.fena.co`;
+const apiUrl =
+  process.env.GATSBY_API_URL || `https://business.api.staging.fena.co`;
+
+console.log(process.env.GATSBY_API_URL, apiUrl);
 
 class Api {
   private readonly apiUrl: string;
@@ -51,29 +54,19 @@ class Api {
     return res.json();
   }
 
-  public async markInvoiceAsPaid(id) {
-    const res = await fetch(
-      `${this.apiUrl}/payment-flow/public/invoice/${id}/complete`,
-      {
-        method: `POST`,
-      },
-    );
-    return res.json();
-  }
-
-  public async markPaymentAsPaid(id) {
-    const res = await fetch(
-      `${this.apiUrl}/payment-flow/public/payment/${id}/complete`,
-      {
-        method: `POST`,
-      },
-    );
-    return res.json();
-  }
-
   public async getLastPaymentByTerminal(terminalId) {
     const res = await fetch(
       `${this.apiUrl}/payment-flow/public/terminal/${terminalId}`,
+      {
+        method: `GET`,
+      },
+    );
+    return res.json();
+  }
+
+  public async manuallyGetStatusFromProvider(providerId: string) {
+    const res = await fetch(
+      `${this.apiUrl}/payment-flow/manual/${providerId}`,
       {
         method: `GET`,
       },

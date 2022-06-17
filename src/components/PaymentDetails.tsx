@@ -19,6 +19,7 @@ interface PaymentDetailsCardProps {
   amount: string;
   depositTo?: string;
   payTo?: string;
+  paidTo?: string;
   paymentMethod?: string;
   accountNumber?: string;
   sortCode?: string;
@@ -28,6 +29,7 @@ const PaymentDetails: React.FunctionComponent<PaymentDetailsCardProps> = ({
   amount,
   depositTo,
   payTo,
+  paidTo,
   paymentMethod,
   accountNumber,
   paymentReference,
@@ -51,6 +53,12 @@ const PaymentDetails: React.FunctionComponent<PaymentDetailsCardProps> = ({
       <PaymentItem className="accent-text-gray">
         <P className="accent-text-gray">Pay to:</P>
         <Span className="accent-text-black">{payTo}</Span>
+      </PaymentItem>
+    )}
+    {paidTo && (
+      <PaymentItem className="accent-text-gray">
+        <P className="accent-text-gray">Paid to:</P>
+        <Span className="accent-text-black">{paidTo}</Span>
       </PaymentItem>
     )}
 
