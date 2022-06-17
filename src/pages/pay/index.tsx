@@ -72,6 +72,9 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     if (window && data?.status && res.data?.status !== data?.status) {
       let url = `${window.location.origin}/payment-success/?customerPaymentId=payment_${id}`;
       switch (res.data.status) {
+        case PaymentStatus.PENDING:
+          url += `&status=pending`;
+          break;
         case PaymentStatus.PAID:
           url += `&status=executed`;
           break;
@@ -92,6 +95,9 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     if (window && data?.status && res.data?.status !== data?.status) {
       let url = `${window.location.origin}/payment-success/?customerPaymentId=invoice_${id}`;
       switch (res.data.status) {
+        case InvoiceStatus.PENDING:
+          url += `&status=pending`;
+          break;
         case InvoiceStatus.PAID:
           url += `&status=executed`;
           break;
