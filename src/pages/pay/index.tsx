@@ -69,13 +69,8 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
 
   const getPaymentData = async (id: string) => {
     const res = await Api.getPaymentInfo(id);
-    console.warn(res);
-    if (
-      window &&
-      data?.status &&
-      res.data?.status !== data?.status &&
-      providerId
-    ) {
+    console.warn(res, providerId);
+    if (window && data?.status && res.data?.status !== data?.status) {
       let url = `${window.location.origin}/payment-success/?customerPaymentId=payment_${id}&id=${providerId}`;
       switch (res.data.status) {
         case PaymentStatus.PENDING:
@@ -97,13 +92,8 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
 
   const getInvoiceData = async (id: string) => {
     const res = await Api.getInvoiceInfo(id);
-    console.warn(res.data);
-    if (
-      window &&
-      data?.status &&
-      res.data?.status !== data?.status &&
-      providerId
-    ) {
+    console.warn(res.data, providerId);
+    if (window && data?.status && res.data?.status !== data?.status) {
       let url = `${window.location.origin}/payment-success/?customerPaymentId=invoice_${id}&id=${providerId}`;
       switch (res.data.status) {
         case InvoiceStatus.PENDING:
@@ -178,6 +168,7 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
         break;
       default:
     }
+    setProviderId(providerApiResult.data.result.single_immediate_payment.id);
     if (typeof window !== `undefined` && window.innerWidth < 900) {
       window.location.replace(providerApiResult.data.result.auth_flow.uri);
       return;
@@ -190,7 +181,6 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     setGeneratedQRData(qr);
     setProviderGeneratedLink(providerApiResult.data.result.auth_flow.uri);
     setProviderDataLoading(false);
-    setProviderId(providerApiResult.data.result.single_immediate_payment.id);
   };
 
   const onConfirmPayment = () => {
