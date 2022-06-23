@@ -56,7 +56,6 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
 
   const getProvidersData = async () => {
     const res = await Api.getProviderList();
-    console.warn(res);
     setProvidersList(
       (res.data || []).map((p) => ({
         name: p.name,
@@ -66,11 +65,10 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     );
   };
 
-  const getPaymentData = async (id: string) => {
+  const getPaymentData = async (id: string, pId?: string) => {
     const res = await Api.getPaymentInfo(id);
-    console.warn(res);
     if (window && data?.status && res.data?.status !== data?.status) {
-      let url = `${window.location.origin}/payment-success/?customerPaymentId=payment_${id}`;
+      let url = `${window.location.origin}/payment-success/?customerPaymentId=payment_${id}&id=${pId}`;
       switch (res.data.status) {
         case PaymentStatus.PENDING:
           url += `&status=pending`;
@@ -89,11 +87,10 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     setData(res.data);
   };
 
-  const getInvoiceData = async (id: string) => {
+  const getInvoiceData = async (id: string, pId?: string) => {
     const res = await Api.getInvoiceInfo(id);
-    console.warn(res.data);
     if (window && data?.status && res.data?.status !== data?.status) {
-      let url = `${window.location.origin}/payment-success/?customerPaymentId=invoice_${id}`;
+      let url = `${window.location.origin}/payment-success/?customerPaymentId=invoice_${id}&id=${pId}`;
       switch (res.data.status) {
         case InvoiceStatus.PENDING:
           url += `&status=pending`;
@@ -135,13 +132,13 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
     }
   };
 
-  const pollPayment = () => {
+  const pollPayment = (pId: string) => () => {
     switch (type) {
       case `invoice`:
-        getInvoiceData(invoiceId);
+        getInvoiceData(invoiceId, pId);
         break;
       case `payment`:
-        getPaymentData(paymentId);
+        getPaymentData(paymentId, pId);
         break;
       default:
     }
@@ -167,11 +164,15 @@ const EcommercePage: React.FunctionComponent<any> = ({ location }) => {
         break;
       default:
     }
+    console.warn(providerApiResult);
     if (typeof window !== `undefined` && window.innerWidth < 900) {
       window.location.replace(providerApiResult.data.result.auth_flow.uri);
       return;
     }
-    setInterval(pollPayment, 1000);
+    setInterval(
+      pollPayment(providerApiResult.data.result.single_immediate_payment.id),
+      1000,
+    );
     const qr = await QRCode.toDataURL(
       providerApiResult.data.result.auth_flow.uri,
       { errorCorrectionLevel: `low` },

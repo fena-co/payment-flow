@@ -21,6 +21,9 @@ const CardHeader = styled.header`
 
 const CardTitleWrapper = styled.div`
   flex: 1 0 auto;
+  @media (max-width: 900px) {
+    flex: initial;
+  }
 `;
 
 const CardTitleText = styled(Strong)`
